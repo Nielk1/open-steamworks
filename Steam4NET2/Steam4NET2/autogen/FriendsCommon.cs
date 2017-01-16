@@ -30,6 +30,7 @@ namespace Steam4NET
 		k_EChatEntryTypeTyping = 2,
 		k_EChatEntryTypeInviteGame = 3,
 		k_EChatEntryTypeEmote = 4,
+		k_EChatEntryTypeLobbyGameStart = 5,
 		k_EChatEntryTypeLeftConversation = 6,
 		k_EChatEntryTypeEntered = 7,
 		k_EChatEntryTypeWasKicked = 8,
@@ -126,7 +127,12 @@ namespace Steam4NET
 	{
 		k_EPersonaStateFlagHasRichPresence = 1,
 		k_EPersonaStateFlagInJoinableGame = 2,
-	};
+        k_EPersonaStateFlagGolden = 4,
+        k_EPersonaStateFlagOnlineUsingWeb = 256,
+        k_EPersonaStateFlagOnlineUsingMobile = 512,
+        k_EPersonaStateFlagOnlineUsingBigPicture = 1024,
+        k_EPersonaStateFlagOnlineUsingVR = 2048,
+    };
 	
 	public enum EPersonaChange : int
 	{
