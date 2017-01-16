@@ -320,6 +320,24 @@ namespace Steam4NET
 	};
 	
 	[StructLayout(LayoutKind.Sequential,Pack=8)]
+	[InteropHelp.CallbackIdentity(164)]
+	public struct GameWebCallback_t
+	{
+		public const int k_iCallback = 164;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+		public string m_szURL;
+	};
+	
+	[StructLayout(LayoutKind.Sequential,Pack=8)]
+	[InteropHelp.CallbackIdentity(165)]
+	public struct StoreAuthURLResponse_t
+	{
+		public const int k_iCallback = 165;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 512)]
+		public string m_szURL;
+	};
+	
+	[StructLayout(LayoutKind.Sequential,Pack=8)]
 	[InteropHelp.CallbackIdentity(901)]
 	public struct SystemIM_t
 	{
@@ -675,8 +693,8 @@ namespace Steam4NET
 		public const int k_iCallback = 942;
 		[MarshalAs(UnmanagedType.I1)]
 		public bool m_bSuccessful;
-		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 512)]
-		public string m_rgchToken;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1024)]
+		public string m_rgchTokens;
 	};
 	
 	[StructLayout(LayoutKind.Sequential,Pack=8)]
@@ -864,10 +882,28 @@ namespace Steam4NET
 	};
 	
 	[StructLayout(LayoutKind.Sequential,Pack=8)]
+	[InteropHelp.CallbackIdentity(965)]
+	public struct VanityURLChangedNotification_t
+	{
+		public const int k_iCallback = 965;
+		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+		public string m_szVanityURL;
+	};
+	
+	[StructLayout(LayoutKind.Sequential,Pack=8)]
 	[InteropHelp.CallbackIdentity(966)]
 	public struct GetSteamGuardDetailsResponse_t
 	{
 		public const int k_iCallback = 966;
+	};
+	
+	[StructLayout(LayoutKind.Sequential,Pack=8)]
+	[InteropHelp.CallbackIdentity(970)]
+	public struct AppLastPlayedTimeChanged_t
+	{
+		public const int k_iCallback = 970;
+		public UInt32 m_unAppID;
+		public UInt32 m_rtimeLastPlayed;
 	};
 	
 }

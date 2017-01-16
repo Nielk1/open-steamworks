@@ -64,6 +64,7 @@
 // screenshots
 #include "ISteamScreenshots001.h"
 #include "ISteamScreenshots002.h"
+#include "ISteamScreenshots003.h"
 
 // user
 #include "ISteamUser004.h"
@@ -80,6 +81,9 @@
 #include "ISteamUser015.h"
 #include "ISteamUser016.h"
 #include "ISteamUser017.h"
+#include "ISteamUser018.h"
+#include "ISteamUser019.h"
+#include "ISteamUser020.h"
 
 // OAuth
 #include "ISteamOAuth001.h"
@@ -91,6 +95,8 @@
 #include "ISteamApps004.h"
 #include "ISteamApps005.h"
 #include "ISteamApps006.h"
+#include "ISteamApps007.h"
+#include "ISteamApps008.h"
 
 // app list
 #include "ISteamAppList001.h"
@@ -116,6 +122,7 @@
 #include "ISteamUtils005.h"
 #include "ISteamUtils006.h"
 #include "ISteamUtils007.h"
+#include "ISteamUtils008.h"
 
 // game server
 #include "ISteamGameServer002.h"
@@ -175,6 +182,7 @@
 #include "ISteamRemoteStorage010.h"
 #include "ISteamRemoteStorage011.h"
 #include "ISteamRemoteStorage012.h"
+#include "ISteamRemoteStorage013.h"
 
 // content server
 #include "ISteamContentServer001.h"
@@ -208,6 +216,8 @@
 
 // controller
 #include "ISteamController001.h"
+#include "ISteamController003.h"
+#include "ISteamController004.h"
 
 // music
 #include "ISteamMusic001.h"
@@ -216,6 +226,7 @@
 #include "ISteamUGC001.h"
 #include "ISteamUGC002.h"
 #include "ISteamUGC003.h"
+#include "ISteamUGC008.h"
 
 #ifndef NO_ICLIENT
 // client interfaces

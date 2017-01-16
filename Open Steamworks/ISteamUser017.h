@@ -154,4 +154,4 @@ public:
 	virtual int GetPlayerSteamLevel() = 0;
 };
 
-#endif // ISTEAMUSER016_H
+#endif // ISTEAMUSER017_H

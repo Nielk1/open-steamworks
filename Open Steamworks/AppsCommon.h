@@ -31,6 +31,8 @@
 #define STEAMAPPS_INTERFACE_VERSION_004 "STEAMAPPS_INTERFACE_VERSION004"
 #define STEAMAPPS_INTERFACE_VERSION_005 "STEAMAPPS_INTERFACE_VERSION005"
 #define STEAMAPPS_INTERFACE_VERSION_006 "STEAMAPPS_INTERFACE_VERSION006"
+#define STEAMAPPS_INTERFACE_VERSION_007 "STEAMAPPS_INTERFACE_VERSION007"
+#define STEAMAPPS_INTERFACE_VERSION_008 "STEAMAPPS_INTERFACE_VERSION008"
 
 #define STEAMAPPLIST_INTERFACE_VERSION_001 "STEAMAPPLIST_INTERFACE_VERSION001"
 
@@ -92,21 +94,21 @@ enum EAppInfoSection
 struct AppUpdateInfo_s
 {
 	RTime32 m_timeUpdateStart;
+	uint32 m_uUnk1; // Update state?
 	uint64 m_unBytesToDownload;
 	uint64 m_unBytesDownloaded;
 	uint64 m_unBytesToProcess;
 	uint64 m_unBytesProcessed;
-	uint32 m_uUnk;
+	int32 m_unEstimatedSecondsRemaining;
+	char m_cUnk[12];
 };
 #pragma pack( pop )
 
 struct DownloadStats_s
 {
-	uint32 m_uIsDownloadEnabled;
 	uint32 m_unCurrentConnections;
-	uint32 m_unCurrentBytesPerSec;
+	uint32 m_unBandwidthUsage;
 	uint64 m_unTotalBytesDownload;
-	CellID_t m_unCurrentCell;
 };
 
 enum EAppDownloadPriority
@@ -199,7 +201,9 @@ enum EAppReleaseState
 
 enum EAppAutoUpdateBehavior
 {
-	// TODO: Reverse this enum
+	k_EAppAutoUpdateBehaviorDefault = 0,
+	k_EAppAutoUpdateBehaviorDisabled,
+	k_EAppAutoUpdateBehaviorHighPriority,
 };
 
 enum EAppAllowDownloadsWhileRunningBehavior
@@ -209,7 +213,13 @@ enum EAppAllowDownloadsWhileRunningBehavior
 
 enum EAppDownloadQueuePlacement
 {
-	// TODO: Reverse this enum
+	k_EAppDownloadQueuePlacementNone = 0,
+	k_EAppDownloadQueuePlacementFirst,
+	k_EAppDownloadQueuePlacementUserInitiated,
+	k_EAppDownloadQueuePlacementUp,
+	k_EAppDownloadQueuePlacementDown,
+	k_EAppDownloadQueuePlacementLast,
+	k_EAppDownloadQueuePlacementPaused,
 };
 
 struct SHADigestWrapper_t
@@ -227,14 +237,11 @@ const int k_cubAppProofOfPurchaseKeyMax = 64;			// max bytes of a legacy cd key 
 //-----------------------------------------------------------------------------
 // Purpose: called when new information about an app has arrived
 //-----------------------------------------------------------------------------
-struct AppDataChanged_t
+struct AppInfoChanged_t
 {
 	enum { k_iCallback = k_iSteamAppsCallbacks + 1 };
 
 	AppId_t m_nAppID;
-
-	bool m_bBySteamUI;
-	bool m_bCDDBUpdate;
 };
 
 struct RequestAppCallbacksComplete_t
@@ -248,7 +255,7 @@ struct AppInfoUpdateComplete_t
 
 	EResult m_EResult;
 	uint32 m_cAppsUpdated;
-	bool m_bSteam2CDDBChanged;
+	uint32 m_cPackagesUpdated;
 };
 
 struct AppEventTriggered_t
@@ -313,12 +320,13 @@ struct DownloadScheduleChanged_t
 	unsigned int m_rgunAppSchedule[32];
 };
 
-struct DlcInstallRequest_t
+struct AppUpdateStateChange_t
 {
 	enum { k_iCallback = k_iSteamAppsCallbacks + 10 };
 
 	AppId_t m_nAppID;
-	bool m_bInstall;
+	uint32 m_eOldState;
+	uint32 m_eNewState;
 };
 
 struct AppLaunchTenFootOverlay_t
@@ -351,6 +359,40 @@ struct RequestAppProofOfPurchaseKeyResponse_t
 	AppId_t m_nAppID;
 	char m_rgchKey[ k_cubAppProofOfPurchaseKeyMax ];	
 };
+
+struct AppAutoUpdateBehaviorChanged_t
+{
+	enum { k_iCallback = k_iSteamAppsCallbacks + 16 };
+
+	AppId_t m_nAppID;
+	EAppAutoUpdateBehavior m_eNewBehavior;
+};
+
+struct AppInfoUpdateProgress_t
+{
+	enum { k_iCallback = k_iSteamAppsCallbacks + 17 };
+
+	uint32 m_cAppsRequested;
+	uint32 m_cAppsUpdated;
+	uint32 m_cPackagesRequested;
+	uint32 m_cPackagesUpdated;
+};
+
+struct AppUpdateStopped_t
+{
+	enum { k_iCallback = k_iSteamAppsCallbacks + 18 };
+
+	AppId_t m_nAppID;
+	AppUpdateInfo_s m_UpdateState;
+};
+
+struct AppConfigChanged_t
+{
+	enum { k_iCallback = k_iSteamAppsCallbacks + 19 };
+
+	AppId_t m_nAppID;
+};
+
 #pragma pack( pop )
 
 #endif // APPSCOMMON_H

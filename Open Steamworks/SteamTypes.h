@@ -83,6 +83,7 @@
 
 
 #ifdef __GNUC__
+
 	typedef int errno_t;
 	
 	#ifdef _S4N_

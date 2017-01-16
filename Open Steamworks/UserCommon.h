@@ -39,6 +39,8 @@
 #define STEAMUSER_INTERFACE_VERSION_015 "SteamUser015"
 #define STEAMUSER_INTERFACE_VERSION_016 "SteamUser016"
 #define STEAMUSER_INTERFACE_VERSION_017 "SteamUser017"
+#define STEAMUSER_INTERFACE_VERSION_018 "SteamUser018"
+#define STEAMUSER_INTERFACE_VERSION_019 "SteamUser019"
 
 // Callback values for callback ValidateAuthTicketResponse_t which is a response to BeginAuthSession
 typedef enum EAuthSessionResponse
@@ -393,6 +395,24 @@ struct GetAuthSessionTicketResponse_t
 	EResult m_eResult;
 };
 
+//-----------------------------------------------------------------------------
+// Purpose: sent to your game in response to a steam://gamewebcallback/ command
+//-----------------------------------------------------------------------------
+struct GameWebCallback_t
+{
+    enum { k_iCallback = k_iSteamUserCallbacks + 64 };
+    char m_szURL[256];
+};
+
+//-----------------------------------------------------------------------------
+// Purpose: sent to your game in response to ISteamUser::RequestStoreAuthURL
+//-----------------------------------------------------------------------------
+struct StoreAuthURLResponse_t
+{
+    enum { k_iCallback = k_iSteamUserCallbacks + 65 };
+    char m_szURL[512];
+};
+
 
 
 // k_iClientUserCallbacks callbacks
@@ -721,7 +741,11 @@ struct WebAuthRequestCallback_t
 	enum { k_iCallback = k_iClientUserCallbacks + 42 };
 	
 	bool m_bSuccessful;
-	char m_rgchToken[512];
+    
+    // contains 2 web session tokens associated with current session
+    // first one is for regular http second for secured
+    // ( should be used as steamLogin and steamLoginSecure cookies )
+	char m_rgchTokens[1024];
 };
 
 struct MicroTxnAuthRequestCallback_t
@@ -882,13 +906,26 @@ struct TestAvailablePasswordResponse_t
 	// TODO : Reverse this callback
 };
 
-// 65 ??
+struct VanityURLChangedNotification_t
+{
+	enum { k_iCallback = k_iClientUserCallbacks + 65 };
+
+	char m_szVanityURL[256];
+};
 
 struct GetSteamGuardDetailsResponse_t
 {
 	enum { k_iCallback = k_iClientUserCallbacks + 66 };
 	
 	// TODO : Reverse this callback
+};
+
+struct AppLastPlayedTimeChanged_t
+{
+	enum { k_iCallback = k_iClientUserCallbacks + 70 };
+
+	AppId_t m_unAppID;
+	RTime32 m_rtimeLastPlayed;
 };
 
 #pragma pack( pop )

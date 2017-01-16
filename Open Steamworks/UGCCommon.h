@@ -26,7 +26,6 @@
 #define STEAMUGC_INTERFACE_VERSION_003 "STEAMUGC_INTERFACE_VERSION003"
 
 typedef uint64 UGCQueryHandle_t;
-typedef uint64 UGCQueryHandle_t;
 typedef uint64 UGCUpdateHandle_t;
 
 const UGCQueryHandle_t k_UGCQueryHandleInvalid = 0xffffffffffffffffull;
@@ -137,6 +136,16 @@ enum EItemUpdateStatus
 	k_EItemUpdateStatusCommittingChanges = 5  // The item update is committing all changes
 };
 
+enum EItemPreviewType
+{
+	//smth
+};
+
+enum EItemStatistic
+{
+	//smth
+};
+
 //-----------------------------------------------------------------------------
 // Purpose: Callback for querying UGC
 //-----------------------------------------------------------------------------
@@ -193,6 +202,52 @@ struct ItemInstalled_t
 	enum { k_iCallback = k_iClientUGCCallbacks + 5 };
 	AppId_t m_unAppID;
 	PublishedFileId_t m_nPublishedFileId;
+};
+
+//-----------------------------------------------------------------------------
+// Purpose: result of DownloadItem(), existing item files can be accessed again
+//-----------------------------------------------------------------------------
+struct DownloadItemResult_t
+{
+	enum { k_iCallback = k_iClientUGCCallbacks + 6 };
+	AppId_t m_unAppID;
+	PublishedFileId_t m_nPublishedFileId;
+	EResult m_eResult;
+};
+
+//-----------------------------------------------------------------------------
+// Purpose: result of AddItemToFavorites() or RemoveItemFromFavorites()
+//-----------------------------------------------------------------------------
+struct UserFavoriteItemsListChanged_t
+{
+	enum { k_iCallback = k_iClientUGCCallbacks + 7 };
+	PublishedFileId_t m_nPublishedFileId;
+	EResult m_eResult;
+	bool m_bWasAddRequest;
+};
+
+//-----------------------------------------------------------------------------
+// Purpose: The result of a call to SetUserItemVote()
+//-----------------------------------------------------------------------------
+struct SetUserItemVoteResult_t
+{
+	enum { k_iCallback = k_iClientUGCCallbacks + 8 };
+	PublishedFileId_t m_nPublishedFileId;
+	EResult m_eResult;
+	bool m_bVoteUp;
+};
+
+//-----------------------------------------------------------------------------
+// Purpose: The result of a call to GetUserItemVote()
+//-----------------------------------------------------------------------------
+struct GetUserItemVoteResult_t
+{
+	enum { k_iCallback = k_iClientUGCCallbacks + 9 };
+	PublishedFileId_t m_nPublishedFileId;
+	EResult m_eResult;
+	bool m_bVotedUp;
+	bool m_bVotedDown;
+	bool m_bVoteSkipped;
 };
 
 #endif // UGCCOMMON_H
