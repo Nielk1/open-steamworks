@@ -31,7 +31,9 @@ namespace Steam4NET
 		public IntPtr LoadItemDefinitions19;
 		public IntPtr GetItemDefinitionIDs20;
 		public IntPtr GetItemDefinitionProperty21;
-		private IntPtr DTorISteamInventory00122;
+		public IntPtr RequestEligiblePromoItemDefinitionsIDs22;
+		public IntPtr GetEligiblePromoItemDefinitionIDs23;
+		private IntPtr DTorISteamInventory00124;
 	};
 	
 	[InteropHelp.InterfaceVersion("STEAMINVENTORY_INTERFACE_V001")]
@@ -181,10 +183,22 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetItemDefinitionPropertyISSU( IntPtr thisptr, Int32 iDefinition, string pchPropertyName, StringBuilder pchValueBuffer, ref UInt32 punValueBufferSize );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetItemDefinitionPropertyISSU( IntPtr thisptr, Int32 iDefinition, IntPtr pchPropertyName, StringBuilder pchValueBuffer, ref UInt32 punValueBufferSize );
 		public bool GetItemDefinitionProperty( Int32 iDefinition, string pchPropertyName, StringBuilder pchValueBuffer, ref UInt32 punValueBufferSize ) 
 		{
-			return this.GetFunction<NativeGetItemDefinitionPropertyISSU>( this.Functions.GetItemDefinitionProperty21 )( this.ObjectAddress, iDefinition, pchPropertyName, pchValueBuffer, ref punValueBufferSize ); 
+			return this.GetFunction<NativeGetItemDefinitionPropertyISSU>( this.Functions.GetItemDefinitionProperty21 )( this.ObjectAddress, iDefinition, InteropHelp.Utf8StringToPtr( pchPropertyName ).GetMarshaledBytes(), pchValueBuffer, ref punValueBufferSize ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeRequestEligiblePromoItemDefinitionsIDsC( IntPtr thisptr, UInt64 arg0 );
+		public Int32 RequestEligiblePromoItemDefinitionsIDs( CSteamID arg0 ) 
+		{
+			return this.GetFunction<NativeRequestEligiblePromoItemDefinitionsIDsC>( this.Functions.RequestEligiblePromoItemDefinitionsIDs22 )( this.ObjectAddress, arg0.ConvertToUint64() ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetEligiblePromoItemDefinitionIDsCIU( IntPtr thisptr, UInt64 arg0, ref Int32 arg1, ref UInt32 arg2 );
+		public Int32 GetEligiblePromoItemDefinitionIDs( CSteamID arg0, ref Int32 arg1, ref UInt32 arg2 ) 
+		{
+			return this.GetFunction<NativeGetEligiblePromoItemDefinitionIDsCIU>( this.Functions.GetEligiblePromoItemDefinitionIDs23 )( this.ObjectAddress, arg0.ConvertToUint64(), ref arg1, ref arg2 ); 
 		}
 		
 	};
