@@ -51,17 +51,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetAccountNameS( IntPtr thisptr, string pchAccountName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetAccountNameS( IntPtr thisptr, IntPtr pchAccountName );
 		public bool SetAccountName( string pchAccountName ) 
 		{
-			return this.GetFunction<NativeSetAccountNameS>( this.Functions.SetAccountName1 )( this.ObjectAddress, pchAccountName ); 
+			return this.GetFunction<NativeSetAccountNameS>( this.Functions.SetAccountName1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchAccountName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetPasswordS( IntPtr thisptr, string pchPassword );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetPasswordS( IntPtr thisptr, IntPtr pchPassword );
 		public bool SetPassword( string pchPassword ) 
 		{
-			return this.GetFunction<NativeSetPasswordS>( this.Functions.SetPassword2 )( this.ObjectAddress, pchPassword ); 
+			return this.GetFunction<NativeSetPasswordS>( this.Functions.SetPassword2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchPassword ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -72,10 +72,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeCreateProcessBUSSUBSU( IntPtr thisptr, Byte[] lpVACBlob, UInt32 cbBlobSize, string lpApplicationName, StringBuilder lpCommandLine, UInt32 dwCreationFlags, Byte[] lpEnvironment, StringBuilder lpCurrentDirectory, UInt32 nGameID );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeCreateProcessBUSSUBSU( IntPtr thisptr, Byte[] lpVACBlob, UInt32 cbBlobSize, IntPtr lpApplicationName, StringBuilder lpCommandLine, UInt32 dwCreationFlags, Byte[] lpEnvironment, StringBuilder lpCurrentDirectory, UInt32 nGameID );
 		public bool CreateProcess( Byte[] lpVACBlob, string lpApplicationName, StringBuilder lpCommandLine, UInt32 dwCreationFlags, Byte[] lpEnvironment, StringBuilder lpCurrentDirectory, UInt32 nGameID ) 
 		{
-			return this.GetFunction<NativeCreateProcessBUSSUBSU>( this.Functions.CreateProcess4 )( this.ObjectAddress, lpVACBlob, (UInt32) lpVACBlob.Length, lpApplicationName, lpCommandLine, dwCreationFlags, lpEnvironment, lpCurrentDirectory, nGameID ); 
+			return this.GetFunction<NativeCreateProcessBUSSUBSU>( this.Functions.CreateProcess4 )( this.ObjectAddress, lpVACBlob, (UInt32) lpVACBlob.Length, InteropHelp.Utf8StringToPtr( lpApplicationName ).GetMarshaledBytes(), lpCommandLine, dwCreationFlags, lpEnvironment, lpCurrentDirectory, nGameID ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EUniverse NativeGetConnectedUniverse( IntPtr thisptr );
@@ -87,7 +87,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetIPCountry( IntPtr thisptr );
 		public string GetIPCountry(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry6 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry6 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetNumLicenses( IntPtr thisptr );
@@ -141,7 +141,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLicensePurchaseCountryCodeU( IntPtr thisptr, UInt32 nLicenseIndex );
 		public string GetLicensePurchaseCountryCode( UInt32 nLicenseIndex ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetLicensePurchaseCountryCodeU>( this.Functions.GetLicensePurchaseCountryCode15 )( this.ObjectAddress, nLicenseIndex ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetLicensePurchaseCountryCodeU>( this.Functions.GetLicensePurchaseCountryCode15 )( this.ObjectAddress, nLicenseIndex ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -198,7 +198,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetPlatformNameB( IntPtr thisptr, ref bool pbIs64Bit );
 		public string GetPlatformName( ref bool pbIs64Bit ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetPlatformNameB>( this.Functions.GetPlatformName24 )( this.ObjectAddress, ref pbIs64Bit ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetPlatformNameB>( this.Functions.GetPlatformName24 )( this.ObjectAddress, ref pbIs64Bit ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetSteam2FullASTicketBI( IntPtr thisptr, Byte[] pubTicket, Int32 cubTicket );

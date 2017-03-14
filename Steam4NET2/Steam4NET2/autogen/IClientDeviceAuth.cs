@@ -27,10 +27,10 @@ namespace Steam4NET
 	[InteropHelp.InterfaceVersion("CLIENTDEVICEAUTH_INTERFACE_VERSION001")]
 	public class IClientDeviceAuth : InteropHelp.NativeWrapper<IClientDeviceAuthVTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeAuthorizeLocalDeviceSU( IntPtr thisptr, string pubUnk, UInt32 cubUnk );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeAuthorizeLocalDeviceSU( IntPtr thisptr, IntPtr pubUnk, UInt32 cubUnk );
 		public UInt64 AuthorizeLocalDevice( string pubUnk, UInt32 cubUnk ) 
 		{
-			return this.GetFunction<NativeAuthorizeLocalDeviceSU>( this.Functions.AuthorizeLocalDevice0 )( this.ObjectAddress, pubUnk, cubUnk ); 
+			return this.GetFunction<NativeAuthorizeLocalDeviceSU>( this.Functions.AuthorizeLocalDevice0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pubUnk ).GetMarshaledBytes(), cubUnk ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeDeauthorizeLocalDeviceU( IntPtr thisptr, UInt32 uUnk );

@@ -20,10 +20,10 @@ namespace Steam4NET
 	[InteropHelp.InterfaceVersion("STEAMUNIFIEDMESSAGES_INTERFACE_VERSION001")]
 	public class ISteamUnifiedMessages001 : InteropHelp.NativeWrapper<ISteamUnifiedMessages001VTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeSendMethodSBUU( IntPtr thisptr, string arg0, Byte[] arg1, UInt32 arg2, UInt64 arg3 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeSendMethodSBUU( IntPtr thisptr, IntPtr arg0, Byte[] arg1, UInt32 arg2, UInt64 arg3 );
 		public UInt64 SendMethod( string arg0, Byte[] arg1, UInt32 arg2, UInt64 arg3 ) 
 		{
-			return this.GetFunction<NativeSendMethodSBUU>( this.Functions.SendMethod0 )( this.ObjectAddress, arg0, arg1, arg2, arg3 ); 
+			return this.GetFunction<NativeSendMethodSBUU>( this.Functions.SendMethod0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2, arg3 ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -48,10 +48,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSendNotificationSBU( IntPtr thisptr, string arg0, Byte[] arg1, UInt32 arg2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSendNotificationSBU( IntPtr thisptr, IntPtr arg0, Byte[] arg1, UInt32 arg2 );
 		public bool SendNotification( string arg0, Byte[] arg1, UInt32 arg2 ) 
 		{
-			return this.GetFunction<NativeSendNotificationSBU>( this.Functions.SendNotification4 )( this.ObjectAddress, arg0, arg1, arg2 ); 
+			return this.GetFunction<NativeSendNotificationSBU>( this.Functions.SendNotification4 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2 ); 
 		}
 		
 	};

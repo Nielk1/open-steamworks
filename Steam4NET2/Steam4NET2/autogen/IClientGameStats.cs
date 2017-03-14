@@ -45,28 +45,28 @@ namespace Steam4NET
 			return this.GetFunction<NativeEndSessionUUI>( this.Functions.EndSession1 )( this.ObjectAddress, ulSessionID, rtTimeEnded, nReasonCode ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeIntUSI( IntPtr thisptr, UInt64 ulSessionID, string pstrName, Int32 nData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeIntUSI( IntPtr thisptr, UInt64 ulSessionID, IntPtr pstrName, Int32 nData );
 		public EResult AddSessionAttributeInt( UInt64 ulSessionID, string pstrName, Int32 nData ) 
 		{
-			return this.GetFunction<NativeAddSessionAttributeIntUSI>( this.Functions.AddSessionAttributeInt2 )( this.ObjectAddress, ulSessionID, pstrName, nData ); 
+			return this.GetFunction<NativeAddSessionAttributeIntUSI>( this.Functions.AddSessionAttributeInt2 )( this.ObjectAddress, ulSessionID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), nData ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeStringUSS( IntPtr thisptr, UInt64 ulSessionID, string pstrName, string pstrData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeStringUSS( IntPtr thisptr, UInt64 ulSessionID, IntPtr pstrName, IntPtr pstrData );
 		public EResult AddSessionAttributeString( UInt64 ulSessionID, string pstrName, string pstrData ) 
 		{
-			return this.GetFunction<NativeAddSessionAttributeStringUSS>( this.Functions.AddSessionAttributeString3 )( this.ObjectAddress, ulSessionID, pstrName, pstrData ); 
+			return this.GetFunction<NativeAddSessionAttributeStringUSS>( this.Functions.AddSessionAttributeString3 )( this.ObjectAddress, ulSessionID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pstrData ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeFloatUSF( IntPtr thisptr, UInt64 ulSessionID, string pstrName, float fData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeFloatUSF( IntPtr thisptr, UInt64 ulSessionID, IntPtr pstrName, float fData );
 		public EResult AddSessionAttributeFloat( UInt64 ulSessionID, string pstrName, float fData ) 
 		{
-			return this.GetFunction<NativeAddSessionAttributeFloatUSF>( this.Functions.AddSessionAttributeFloat4 )( this.ObjectAddress, ulSessionID, pstrName, fData ); 
+			return this.GetFunction<NativeAddSessionAttributeFloatUSF>( this.Functions.AddSessionAttributeFloat4 )( this.ObjectAddress, ulSessionID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), fData ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddNewRowUUS( IntPtr thisptr, ref UInt64 pulRowID, UInt64 ulSessionID, string pstrTableName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddNewRowUUS( IntPtr thisptr, ref UInt64 pulRowID, UInt64 ulSessionID, IntPtr pstrTableName );
 		public EResult AddNewRow( ref UInt64 pulRowID, UInt64 ulSessionID, string pstrTableName ) 
 		{
-			return this.GetFunction<NativeAddNewRowUUS>( this.Functions.AddNewRow5 )( this.ObjectAddress, ref pulRowID, ulSessionID, pstrTableName ); 
+			return this.GetFunction<NativeAddNewRowUUS>( this.Functions.AddNewRow5 )( this.ObjectAddress, ref pulRowID, ulSessionID, InteropHelp.Utf8StringToPtr( pstrTableName ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeCommitRowU( IntPtr thisptr, UInt64 ulRowID );
@@ -81,64 +81,64 @@ namespace Steam4NET
 			return this.GetFunction<NativeCommitOutstandingRowsU>( this.Functions.CommitOutstandingRows7 )( this.ObjectAddress, ulSessionID ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAttributeIntUSI( IntPtr thisptr, UInt64 ulRowID, string pstrName, Int32 iData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAttributeIntUSI( IntPtr thisptr, UInt64 ulRowID, IntPtr pstrName, Int32 iData );
 		public EResult AddRowAttributeInt( UInt64 ulRowID, string pstrName, Int32 iData ) 
 		{
-			return this.GetFunction<NativeAddRowAttributeIntUSI>( this.Functions.AddRowAttributeInt8 )( this.ObjectAddress, ulRowID, pstrName, iData ); 
+			return this.GetFunction<NativeAddRowAttributeIntUSI>( this.Functions.AddRowAttributeInt8 )( this.ObjectAddress, ulRowID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), iData ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAtributeStringUSS( IntPtr thisptr, UInt64 ulRowID, string pstrName, string pstrData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAtributeStringUSS( IntPtr thisptr, UInt64 ulRowID, IntPtr pstrName, IntPtr pstrData );
 		public EResult AddRowAtributeString( UInt64 ulRowID, string pstrName, string pstrData ) 
 		{
-			return this.GetFunction<NativeAddRowAtributeStringUSS>( this.Functions.AddRowAtributeString9 )( this.ObjectAddress, ulRowID, pstrName, pstrData ); 
+			return this.GetFunction<NativeAddRowAtributeStringUSS>( this.Functions.AddRowAtributeString9 )( this.ObjectAddress, ulRowID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pstrData ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAttributeFloatUSF( IntPtr thisptr, UInt64 ulRowID, string pstrName, float fData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAttributeFloatUSF( IntPtr thisptr, UInt64 ulRowID, IntPtr pstrName, float fData );
 		public EResult AddRowAttributeFloat( UInt64 ulRowID, string pstrName, float fData ) 
 		{
-			return this.GetFunction<NativeAddRowAttributeFloatUSF>( this.Functions.AddRowAttributeFloat10 )( this.ObjectAddress, ulRowID, pstrName, fData ); 
+			return this.GetFunction<NativeAddRowAttributeFloatUSF>( this.Functions.AddRowAttributeFloat10 )( this.ObjectAddress, ulRowID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), fData ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeInt64USI( IntPtr thisptr, UInt64 ulSessionID, string pstrName, Int64 llData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddSessionAttributeInt64USI( IntPtr thisptr, UInt64 ulSessionID, IntPtr pstrName, Int64 llData );
 		public EResult AddSessionAttributeInt64( UInt64 ulSessionID, string pstrName, Int64 llData ) 
 		{
-			return this.GetFunction<NativeAddSessionAttributeInt64USI>( this.Functions.AddSessionAttributeInt6411 )( this.ObjectAddress, ulSessionID, pstrName, llData ); 
+			return this.GetFunction<NativeAddSessionAttributeInt64USI>( this.Functions.AddSessionAttributeInt6411 )( this.ObjectAddress, ulSessionID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), llData ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAttributeInt64USI( IntPtr thisptr, UInt64 ulRowID, string pstrName, Int64 llData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeAddRowAttributeInt64USI( IntPtr thisptr, UInt64 ulRowID, IntPtr pstrName, Int64 llData );
 		public EResult AddRowAttributeInt64( UInt64 ulRowID, string pstrName, Int64 llData ) 
 		{
-			return this.GetFunction<NativeAddRowAttributeInt64USI>( this.Functions.AddRowAttributeInt6412 )( this.ObjectAddress, ulRowID, pstrName, llData ); 
+			return this.GetFunction<NativeAddRowAttributeInt64USI>( this.Functions.AddRowAttributeInt6412 )( this.ObjectAddress, ulRowID, InteropHelp.Utf8StringToPtr( pstrName ).GetMarshaledBytes(), llData ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeReportStringUIS( IntPtr thisptr, UInt64 ulSessionID, Int32 iSeverity, string cszFormat );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeReportStringUIS( IntPtr thisptr, UInt64 ulSessionID, Int32 iSeverity, IntPtr cszFormat );
 		public EResult ReportString( UInt64 ulSessionID, Int32 iSeverity, string cszFormat ) 
 		{
-			return this.GetFunction<NativeReportStringUIS>( this.Functions.ReportString13 )( this.ObjectAddress, ulSessionID, iSeverity, cszFormat ); 
+			return this.GetFunction<NativeReportStringUIS>( this.Functions.ReportString13 )( this.ObjectAddress, ulSessionID, iSeverity, InteropHelp.Utf8StringToPtr( cszFormat ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult Native_ReportStringUISIB( IntPtr thisptr, UInt64 ulSessionID, Int32 arg1, string arg2, Int32 arg3, Byte[] arg4 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult Native_ReportStringUISIB( IntPtr thisptr, UInt64 ulSessionID, Int32 arg1, IntPtr arg2, Int32 arg3, Byte[] arg4 );
 		public EResult _ReportString( UInt64 ulSessionID, Int32 arg1, string arg2, Int32 arg3, Byte[] arg4 ) 
 		{
-			return this.GetFunction<Native_ReportStringUISIB>( this.Functions._ReportString14 )( this.ObjectAddress, ulSessionID, arg1, arg2, arg3, arg4 ); 
+			return this.GetFunction<Native_ReportStringUISIB>( this.Functions._ReportString14 )( this.ObjectAddress, ulSessionID, arg1, InteropHelp.Utf8StringToPtr( arg2 ).GetMarshaledBytes(), arg3, arg4 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeReportStringAccumulatedUIS( IntPtr thisptr, UInt64 ulSessionID, Int32 iSeverity, string cszFormat );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeReportStringAccumulatedUIS( IntPtr thisptr, UInt64 ulSessionID, Int32 iSeverity, IntPtr cszFormat );
 		public EResult ReportStringAccumulated( UInt64 ulSessionID, Int32 iSeverity, string cszFormat ) 
 		{
-			return this.GetFunction<NativeReportStringAccumulatedUIS>( this.Functions.ReportStringAccumulated15 )( this.ObjectAddress, ulSessionID, iSeverity, cszFormat ); 
+			return this.GetFunction<NativeReportStringAccumulatedUIS>( this.Functions.ReportStringAccumulated15 )( this.ObjectAddress, ulSessionID, iSeverity, InteropHelp.Utf8StringToPtr( cszFormat ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult Native_ReportStringAccumulatedUISIB( IntPtr thisptr, UInt64 ulSessionID, Int32 arg1, string arg2, Int32 arg3, Byte[] arg4 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult Native_ReportStringAccumulatedUISIB( IntPtr thisptr, UInt64 ulSessionID, Int32 arg1, IntPtr arg2, Int32 arg3, Byte[] arg4 );
 		public EResult _ReportStringAccumulated( UInt64 ulSessionID, Int32 arg1, string arg2, Int32 arg3, Byte[] arg4 ) 
 		{
-			return this.GetFunction<Native_ReportStringAccumulatedUISIB>( this.Functions._ReportStringAccumulated16 )( this.ObjectAddress, ulSessionID, arg1, arg2, arg3, arg4 ); 
+			return this.GetFunction<Native_ReportStringAccumulatedUISIB>( this.Functions._ReportStringAccumulated16 )( this.ObjectAddress, ulSessionID, arg1, InteropHelp.Utf8StringToPtr( arg2 ).GetMarshaledBytes(), arg3, arg4 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeReportBugScreenshotUSIB( IntPtr thisptr, UInt64 ulSessionID, string szBugText, Int32 cubScreenshot, Byte[] pubScreenshot );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EResult NativeReportBugScreenshotUSIB( IntPtr thisptr, UInt64 ulSessionID, IntPtr szBugText, Int32 cubScreenshot, Byte[] pubScreenshot );
 		public EResult ReportBugScreenshot( UInt64 ulSessionID, string szBugText, Int32 cubScreenshot, Byte[] pubScreenshot ) 
 		{
-			return this.GetFunction<NativeReportBugScreenshotUSIB>( this.Functions.ReportBugScreenshot17 )( this.ObjectAddress, ulSessionID, szBugText, cubScreenshot, pubScreenshot ); 
+			return this.GetFunction<NativeReportBugScreenshotUSIB>( this.Functions.ReportBugScreenshot17 )( this.ObjectAddress, ulSessionID, InteropHelp.Utf8StringToPtr( szBugText ).GetMarshaledBytes(), cubScreenshot, pubScreenshot ); 
 		}
 		
 	};

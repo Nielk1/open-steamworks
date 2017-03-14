@@ -8,7 +8,33 @@ namespace Steam4NET
 {
     public class InteropHelp
     {
+        public class Utf8Wrapper
+        {
+            private IntPtr i_data;
 
+            public Utf8Wrapper(string data)
+            {
+                byte[] _data = Encoding.UTF8.GetBytes(data);
+                i_data = Marshal.AllocHGlobal(_data.Length + 1);
+                Marshal.Copy(_data, 0, i_data, _data.Length);
+                Marshal.WriteByte(i_data, _data.Length, 0x00);
+            }
+
+            ~Utf8Wrapper()
+            {
+                Marshal.FreeHGlobal(i_data);
+            }
+
+            public IntPtr GetMarshaledBytes()
+            {
+                return i_data;
+            }
+        }
+        public static Utf8Wrapper Utf8StringToPtr(string data)
+        {
+            return new Utf8Wrapper(data);
+        }
+        
         public static string Utf8PtrToString(IntPtr utf8)
         {
             int len = MultiByteToWideChar(65001, 0, utf8, -1, null, 0);

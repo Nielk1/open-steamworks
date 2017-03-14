@@ -46,10 +46,10 @@ namespace Steam4NET
 	[InteropHelp.InterfaceVersion("CLIENTDEPOTBUILDER_INTERFACE_VERSION001")]
 	public class IClientDepotBuilder : InteropHelp.NativeWrapper<IClientDepotBuilderVTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeRegisterAppBuildUBS( IntPtr thisptr, UInt32 nAppID, [MarshalAs(UnmanagedType.I1)] bool bLocalCSBuild, string cszDescription );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeRegisterAppBuildUBS( IntPtr thisptr, UInt32 nAppID, [MarshalAs(UnmanagedType.I1)] bool bLocalCSBuild, IntPtr cszDescription );
 		public UInt32 RegisterAppBuild( UInt32 nAppID, bool bLocalCSBuild, string cszDescription ) 
 		{
-			return this.GetFunction<NativeRegisterAppBuildUBS>( this.Functions.RegisterAppBuild0 )( this.ObjectAddress, nAppID, bLocalCSBuild, cszDescription ); 
+			return this.GetFunction<NativeRegisterAppBuildUBS>( this.Functions.RegisterAppBuild0 )( this.ObjectAddress, nAppID, bLocalCSBuild, InteropHelp.Utf8StringToPtr( cszDescription ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetRegisteredBuildIDU( IntPtr thisptr, UInt32 arg0 );
@@ -58,10 +58,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetRegisteredBuildIDU>( this.Functions.GetRegisteredBuildID1 )( this.ObjectAddress, arg0 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeStartDepotBuildFromConfigFileSSSUUS( IntPtr thisptr, string pchConfigFile, string arg1, string arg2, UInt32 arg3, UInt32 arg4, string arg5 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeStartDepotBuildFromConfigFileSSSUUS( IntPtr thisptr, IntPtr pchConfigFile, IntPtr arg1, IntPtr arg2, UInt32 arg3, UInt32 arg4, IntPtr arg5 );
 		public UInt32 StartDepotBuildFromConfigFile( string pchConfigFile, string arg1, string arg2, UInt32 arg3, UInt32 arg4, string arg5 ) 
 		{
-			return this.GetFunction<NativeStartDepotBuildFromConfigFileSSSUUS>( this.Functions.StartDepotBuildFromConfigFile2 )( this.ObjectAddress, pchConfigFile, arg1, arg2, arg3, arg4, arg5 ); 
+			return this.GetFunction<NativeStartDepotBuildFromConfigFileSSSUUS>( this.Functions.StartDepotBuildFromConfigFile2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchConfigFile ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( arg1 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( arg2 ).GetMarshaledBytes(), arg3, arg4, InteropHelp.Utf8StringToPtr( arg5 ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -78,10 +78,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeCloseDepotBuildHandleU>( this.Functions.CloseDepotBuildHandle4 )( this.ObjectAddress, hDepotBuild ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeReconstructDepotFromManifestAndChunksSSSU( IntPtr thisptr, string pchLocalManifestPath, string pchLocalChunkPath, string pchRestorePath, UInt32 arg3 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeReconstructDepotFromManifestAndChunksSSSU( IntPtr thisptr, IntPtr pchLocalManifestPath, IntPtr pchLocalChunkPath, IntPtr pchRestorePath, UInt32 arg3 );
 		public UInt32 ReconstructDepotFromManifestAndChunks( string pchLocalManifestPath, string pchLocalChunkPath, string pchRestorePath, UInt32 arg3 ) 
 		{
-			return this.GetFunction<NativeReconstructDepotFromManifestAndChunksSSSU>( this.Functions.ReconstructDepotFromManifestAndChunks5 )( this.ObjectAddress, pchLocalManifestPath, pchLocalChunkPath, pchRestorePath, arg3 ); 
+			return this.GetFunction<NativeReconstructDepotFromManifestAndChunksSSSU>( this.Functions.ReconstructDepotFromManifestAndChunks5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchLocalManifestPath ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchLocalChunkPath ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchRestorePath ).GetMarshaledBytes(), arg3 ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -98,16 +98,16 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetManifestGIDsUUUB>( this.Functions.GetManifestGIDs7 )( this.ObjectAddress, hDepotBuild, ref pBaselineGID, ref pNewGID, ref arg3 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeFinishAppBuildUUSBU( IntPtr thisptr, UInt32 uBuildID, UInt32 nAppID, string cszBetaKey, [MarshalAs(UnmanagedType.I1)] bool bOnlyFinish, UInt32 cNumSkipDepots );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeFinishAppBuildUUSBU( IntPtr thisptr, UInt32 uBuildID, UInt32 nAppID, IntPtr cszBetaKey, [MarshalAs(UnmanagedType.I1)] bool bOnlyFinish, UInt32 cNumSkipDepots );
 		public UInt32 FinishAppBuild( UInt32 uBuildID, UInt32 nAppID, string cszBetaKey, bool bOnlyFinish, UInt32 cNumSkipDepots ) 
 		{
-			return this.GetFunction<NativeFinishAppBuildUUSBU>( this.Functions.FinishAppBuild8 )( this.ObjectAddress, uBuildID, nAppID, cszBetaKey, bOnlyFinish, cNumSkipDepots ); 
+			return this.GetFunction<NativeFinishAppBuildUUSBU>( this.Functions.FinishAppBuild8 )( this.ObjectAddress, uBuildID, nAppID, InteropHelp.Utf8StringToPtr( cszBetaKey ).GetMarshaledBytes(), bOnlyFinish, cNumSkipDepots ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeVerifyChunkStoreUUS( IntPtr thisptr, UInt32 arg0, UInt32 arg1, string arg2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeVerifyChunkStoreUUS( IntPtr thisptr, UInt32 arg0, UInt32 arg1, IntPtr arg2 );
 		public UInt32 VerifyChunkStore( UInt32 arg0, UInt32 arg1, string arg2 ) 
 		{
-			return this.GetFunction<NativeVerifyChunkStoreUUS>( this.Functions.VerifyChunkStore9 )( this.ObjectAddress, arg0, arg1, arg2 ); 
+			return this.GetFunction<NativeVerifyChunkStoreUUS>( this.Functions.VerifyChunkStore9 )( this.ObjectAddress, arg0, arg1, InteropHelp.Utf8StringToPtr( arg2 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeStartUploadTestUU( IntPtr thisptr, UInt32 arg0, UInt32 arg1 );

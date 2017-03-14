@@ -106,10 +106,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetCachedCredentialsForSSIDSW( IntPtr thisptr, string pchUnk, ref WirelessCredentials_t pCredentials );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetCachedCredentialsForSSIDSW( IntPtr thisptr, IntPtr pchUnk, ref WirelessCredentials_t pCredentials );
 		public bool GetCachedCredentialsForSSID( string pchUnk, ref WirelessCredentials_t pCredentials ) 
 		{
-			return this.GetFunction<NativeGetCachedCredentialsForSSIDSW>( this.Functions.GetCachedCredentialsForSSID8 )( this.ObjectAddress, pchUnk, ref pCredentials ); 
+			return this.GetFunction<NativeGetCachedCredentialsForSSIDSW>( this.Functions.GetCachedCredentialsForSSID8 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchUnk ).GetMarshaledBytes(), ref pCredentials ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EWirelessSecurityFlags NativeGetPreferredSecurityMethodU( IntPtr thisptr, UInt32 uUnk );
@@ -130,10 +130,10 @@ namespace Steam4NET
 			this.GetFunction<NativeDeactivateWiredConnectionI>( this.Functions.DeactivateWiredConnection11 )( this.ObjectAddress, iConnection ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate ENetworkDeviceManagerError NativeConnectToAccessPointSBES( IntPtr thisptr, string pchUnk1, [MarshalAs(UnmanagedType.I1)] bool bUnk, EWirelessSecurityFlags eSecurityFlags, string pchUnk2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate ENetworkDeviceManagerError NativeConnectToAccessPointSBES( IntPtr thisptr, IntPtr pchUnk1, [MarshalAs(UnmanagedType.I1)] bool bUnk, EWirelessSecurityFlags eSecurityFlags, IntPtr pchUnk2 );
 		public ENetworkDeviceManagerError ConnectToAccessPoint( string pchUnk1, bool bUnk, EWirelessSecurityFlags eSecurityFlags, string pchUnk2 ) 
 		{
-			return this.GetFunction<NativeConnectToAccessPointSBES>( this.Functions.ConnectToAccessPoint12 )( this.ObjectAddress, pchUnk1, bUnk, eSecurityFlags, pchUnk2 ); 
+			return this.GetFunction<NativeConnectToAccessPointSBES>( this.Functions.ConnectToAccessPoint12 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchUnk1 ).GetMarshaledBytes(), bUnk, eSecurityFlags, InteropHelp.Utf8StringToPtr( pchUnk2 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeDisconnectFromAccessPoint( IntPtr thisptr );

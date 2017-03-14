@@ -248,19 +248,19 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetPersonaName( IntPtr thisptr );
 		public string GetPersonaName(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetPersonaName>( this.Functions.GetPersonaName0 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetPersonaName>( this.Functions.GetPersonaName0 )( this.ObjectAddress ) ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetPersonaNameS( IntPtr thisptr, string pchPersonaName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetPersonaNameS( IntPtr thisptr, IntPtr pchPersonaName );
 		public void SetPersonaName( string pchPersonaName ) 
 		{
-			this.GetFunction<NativeSetPersonaNameS>( this.Functions.SetPersonaName1 )( this.ObjectAddress, pchPersonaName ); 
+			this.GetFunction<NativeSetPersonaNameS>( this.Functions.SetPersonaName1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchPersonaName ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeSetPersonaNameExSB( IntPtr thisptr, string pchPersonaName, [MarshalAs(UnmanagedType.I1)] bool bSendCallback );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeSetPersonaNameExSB( IntPtr thisptr, IntPtr pchPersonaName, [MarshalAs(UnmanagedType.I1)] bool bSendCallback );
 		public UInt64 SetPersonaNameEx( string pchPersonaName, bool bSendCallback ) 
 		{
-			return this.GetFunction<NativeSetPersonaNameExSB>( this.Functions.SetPersonaNameEx2 )( this.ObjectAddress, pchPersonaName, bSendCallback ); 
+			return this.GetFunction<NativeSetPersonaNameExSB>( this.Functions.SetPersonaNameEx2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchPersonaName ).GetMarshaledBytes(), bSendCallback ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -334,7 +334,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendPersonaNameC( IntPtr thisptr, UInt64 steamIDFriend );
 		public string GetFriendPersonaName( CSteamID steamIDFriend ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendPersonaNameC>( this.Functions.GetFriendPersonaName14 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendPersonaNameC>( this.Functions.GetFriendPersonaName14 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetSmallFriendAvatarC( IntPtr thisptr, UInt64 steamIDFriend );
@@ -362,23 +362,23 @@ namespace Steam4NET
 			return this.GetFunction<NativeBGetFriendAvatarURLSUCI>( this.Functions.BGetFriendAvatarURL18 )( this.ObjectAddress, arg0, arg1, arg2.ConvertToUint64(), arg3 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetFriendRegValueCSS( IntPtr thisptr, UInt64 steamIDFriend, string pchKey, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetFriendRegValueCSS( IntPtr thisptr, UInt64 steamIDFriend, IntPtr pchKey, IntPtr pchValue );
 		public void SetFriendRegValue( CSteamID steamIDFriend, string pchKey, string pchValue ) 
 		{
-			this.GetFunction<NativeSetFriendRegValueCSS>( this.Functions.SetFriendRegValue19 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), pchKey, pchValue ); 
+			this.GetFunction<NativeSetFriendRegValueCSS>( this.Functions.SetFriendRegValue19 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendRegValueCS( IntPtr thisptr, UInt64 steamIDFriend, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendRegValueCS( IntPtr thisptr, UInt64 steamIDFriend, IntPtr pchKey );
 		public string GetFriendRegValue( CSteamID steamIDFriend, string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendRegValueCS>( this.Functions.GetFriendRegValue20 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendRegValueCS>( this.Functions.GetFriendRegValue20 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeDeleteFriendRegValueCS( IntPtr thisptr, UInt64 steamID, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeDeleteFriendRegValueCS( IntPtr thisptr, UInt64 steamID, IntPtr pchKey );
 		public bool DeleteFriendRegValue( CSteamID steamID, string pchKey ) 
 		{
-			return this.GetFunction<NativeDeleteFriendRegValueCS>( this.Functions.DeleteFriendRegValue21 )( this.ObjectAddress, steamID.ConvertToUint64(), pchKey ); 
+			return this.GetFunction<NativeDeleteFriendRegValueCS>( this.Functions.DeleteFriendRegValue21 )( this.ObjectAddress, steamID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -391,7 +391,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendGamePlayedExtraInfoC( IntPtr thisptr, UInt64 steamIDFriend );
 		public string GetFriendGamePlayedExtraInfo( CSteamID steamIDFriend ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendGamePlayedExtraInfoC>( this.Functions.GetFriendGamePlayedExtraInfo23 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendGamePlayedExtraInfoC>( this.Functions.GetFriendGamePlayedExtraInfo23 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeGetFriendGameServerC( IntPtr thisptr, ref UInt64 retarg, UInt64 steamIDFriend );
@@ -428,7 +428,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendPersonaNameHistoryCI( IntPtr thisptr, UInt64 steamIDFriend, Int32 iPersonaName );
 		public string GetFriendPersonaNameHistory( CSteamID steamIDFriend, Int32 iPersonaName ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendPersonaNameHistoryCI>( this.Functions.GetFriendPersonaNameHistory29 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), iPersonaName ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendPersonaNameHistoryCI>( this.Functions.GetFriendPersonaNameHistory29 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), iPersonaName ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeRequestPersonaNameHistoryC( IntPtr thisptr, UInt64 steamIDFriend );
@@ -440,7 +440,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendPersonaNameHistoryAndDateCIU( IntPtr thisptr, UInt64 steamIDFriend, Int32 iPersonaName, ref UInt32 puTime );
 		public string GetFriendPersonaNameHistoryAndDate( CSteamID steamIDFriend, Int32 iPersonaName, ref UInt32 puTime ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendPersonaNameHistoryAndDateCIU>( this.Functions.GetFriendPersonaNameHistoryAndDate31 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), iPersonaName, ref puTime ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendPersonaNameHistoryAndDateCIU>( this.Functions.GetFriendPersonaNameHistoryAndDate31 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), iPersonaName, ref puTime ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -486,10 +486,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeCreateFriendsGroupS( IntPtr thisptr, string pchGroupName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeCreateFriendsGroupS( IntPtr thisptr, IntPtr pchGroupName );
 		public bool CreateFriendsGroup( string pchGroupName ) 
 		{
-			return this.GetFunction<NativeCreateFriendsGroupS>( this.Functions.CreateFriendsGroup38 )( this.ObjectAddress, pchGroupName ); 
+			return this.GetFunction<NativeCreateFriendsGroupS>( this.Functions.CreateFriendsGroup38 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGroupName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -500,10 +500,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeRenameFriendsGroupSI( IntPtr thisptr, string pchNewGroupName, Int16 iGroupID );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeRenameFriendsGroupSI( IntPtr thisptr, IntPtr pchNewGroupName, Int16 iGroupID );
 		public bool RenameFriendsGroup( string pchNewGroupName, Int16 iGroupID ) 
 		{
-			return this.GetFunction<NativeRenameFriendsGroupSI>( this.Functions.RenameFriendsGroup40 )( this.ObjectAddress, pchNewGroupName, iGroupID ); 
+			return this.GetFunction<NativeRenameFriendsGroupSI>( this.Functions.RenameFriendsGroup40 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchNewGroupName ).GetMarshaledBytes(), iGroupID ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -542,7 +542,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendsGroupNameI( IntPtr thisptr, Int16 iGroupID );
 		public string GetFriendsGroupName( Int16 iGroupID ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendsGroupNameI>( this.Functions.GetFriendsGroupName46 )( this.ObjectAddress, iGroupID ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendsGroupNameI>( this.Functions.GetFriendsGroupName46 )( this.ObjectAddress, iGroupID ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int16 NativeGetFriendsGroupMembershipCountI( IntPtr thisptr, Int16 iGroupID );
@@ -584,14 +584,14 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetPlayerNicknameC( IntPtr thisptr, UInt64 playerSteamID );
 		public string GetPlayerNickname( CSteamID playerSteamID ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetPlayerNicknameC>( this.Functions.GetPlayerNickname53 )( this.ObjectAddress, playerSteamID.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetPlayerNicknameC>( this.Functions.GetPlayerNickname53 )( this.ObjectAddress, playerSteamID.ConvertToUint64() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetPlayerNicknameCS( IntPtr thisptr, UInt64 playerSteamID, string cszNickname );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetPlayerNicknameCS( IntPtr thisptr, UInt64 playerSteamID, IntPtr cszNickname );
 		public bool SetPlayerNickname( CSteamID playerSteamID, string cszNickname ) 
 		{
-			return this.GetFunction<NativeSetPlayerNicknameCS>( this.Functions.SetPlayerNickname54 )( this.ObjectAddress, playerSteamID.ConvertToUint64(), cszNickname ); 
+			return this.GetFunction<NativeSetPlayerNicknameCS>( this.Functions.SetPlayerNickname54 )( this.ObjectAddress, playerSteamID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( cszNickname ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetFriendSteamLevelC( IntPtr thisptr, UInt64 steamIDFriend );
@@ -652,13 +652,13 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetClanNameC( IntPtr thisptr, UInt64 steamIDClan );
 		public string GetClanName( CSteamID steamIDClan ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetClanNameC>( this.Functions.GetClanName64 )( this.ObjectAddress, steamIDClan.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetClanNameC>( this.Functions.GetClanName64 )( this.ObjectAddress, steamIDClan.ConvertToUint64() ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetClanTagC( IntPtr thisptr, UInt64 steamIDClan );
 		public string GetClanTag( CSteamID steamIDClan ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetClanTagC>( this.Functions.GetClanTag65 )( this.ObjectAddress, steamIDClan.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetClanTagC>( this.Functions.GetClanTag65 )( this.ObjectAddress, steamIDClan.ConvertToUint64() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -728,10 +728,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSendClanChatMessageCS( IntPtr thisptr, UInt64 groupID, string cszMessage );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSendClanChatMessageCS( IntPtr thisptr, UInt64 groupID, IntPtr cszMessage );
 		public bool SendClanChatMessage( CSteamID groupID, string cszMessage ) 
 		{
-			return this.GetFunction<NativeSendClanChatMessageCS>( this.Functions.SendClanChatMessage76 )( this.ObjectAddress, groupID.ConvertToUint64(), cszMessage ); 
+			return this.GetFunction<NativeSendClanChatMessageCS>( this.Functions.SendClanChatMessage76 )( this.ObjectAddress, groupID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( cszMessage ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetClanChatMessageCIBIEC( IntPtr thisptr, UInt64 groupID, Int32 iChatID, Byte[] pvData, Int32 cubData, ref EChatEntryType peChatEntryType, ref UInt64 pSteamIDChatter );
@@ -776,10 +776,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeReplyToFriendMessageCS( IntPtr thisptr, UInt64 friendID, string cszMessage );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeReplyToFriendMessageCS( IntPtr thisptr, UInt64 friendID, IntPtr cszMessage );
 		public bool ReplyToFriendMessage( CSteamID friendID, string cszMessage ) 
 		{
-			return this.GetFunction<NativeReplyToFriendMessageCS>( this.Functions.ReplyToFriendMessage83 )( this.ObjectAddress, friendID.ConvertToUint64(), cszMessage ); 
+			return this.GetFunction<NativeReplyToFriendMessageCS>( this.Functions.ReplyToFriendMessage83 )( this.ObjectAddress, friendID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( cszMessage ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFriendMessageCIBIE( IntPtr thisptr, UInt64 friendID, Int32 iChatID, Byte[] pvData, Int32 cubData, ref EChatEntryType peChatEntryType );
@@ -846,10 +846,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRichPresenceUSS( IntPtr thisptr, UInt32 nAppId, string pchKey, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRichPresenceUSS( IntPtr thisptr, UInt32 nAppId, IntPtr pchKey, IntPtr pchValue );
 		public bool SetRichPresence( UInt32 nAppId, string pchKey, string pchValue ) 
 		{
-			return this.GetFunction<NativeSetRichPresenceUSS>( this.Functions.SetRichPresence94 )( this.ObjectAddress, nAppId, pchKey, pchValue ); 
+			return this.GetFunction<NativeSetRichPresenceUSS>( this.Functions.SetRichPresence94 )( this.ObjectAddress, nAppId, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeClearRichPresenceU( IntPtr thisptr, UInt32 nAppId );
@@ -858,10 +858,10 @@ namespace Steam4NET
 			this.GetFunction<NativeClearRichPresenceU>( this.Functions.ClearRichPresence95 )( this.ObjectAddress, nAppId ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendRichPresenceUCS( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendRichPresenceUCS( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend, IntPtr pchKey );
 		public string GetFriendRichPresence( UInt32 nAppId, CSteamID steamIDFriend, string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendRichPresenceUCS>( this.Functions.GetFriendRichPresence96 )( this.ObjectAddress, nAppId, steamIDFriend.ConvertToUint64(), pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendRichPresenceUCS>( this.Functions.GetFriendRichPresence96 )( this.ObjectAddress, nAppId, steamIDFriend.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFriendRichPresenceKeyCountUC( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend );
@@ -873,7 +873,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendRichPresenceKeyByIndexUCI( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend, Int32 iIndex );
 		public string GetFriendRichPresenceKeyByIndex( UInt32 nAppId, CSteamID steamIDFriend, Int32 iIndex ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendRichPresenceKeyByIndexUCI>( this.Functions.GetFriendRichPresenceKeyByIndex98 )( this.ObjectAddress, nAppId, steamIDFriend.ConvertToUint64(), iIndex ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendRichPresenceKeyByIndexUCI>( this.Functions.GetFriendRichPresenceKeyByIndex98 )( this.ObjectAddress, nAppId, steamIDFriend.ConvertToUint64(), iIndex ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeRequestFriendRichPresenceUC( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend );
@@ -1039,7 +1039,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetChatRoomNameC( IntPtr thisptr, UInt64 steamIDChat );
 		public string GetChatRoomName( CSteamID steamIDChat ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetChatRoomNameC>( this.Functions.GetChatRoomName123 )( this.ObjectAddress, steamIDChat.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetChatRoomNameC>( this.Functions.GetChatRoomName123 )( this.ObjectAddress, steamIDChat.ConvertToUint64() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -1049,10 +1049,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeBGetChatRoomMemberDetailsCCUU>( this.Functions.BGetChatRoomMemberDetails124 )( this.ObjectAddress, steamIDChat.ConvertToUint64(), steamIDUser.ConvertToUint64(), ref prgfChatMemberDetails, ref prgfChatMemberDetailsLocal ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeCreateChatRoomEUSECCCUUU( IntPtr thisptr, EChatRoomType eType, UInt64 ulGameID, string pchName, ELobbyType eLobbyType, UInt64 steamIDClan, UInt64 steamIDFriendChat, UInt64 steamIDInvited, UInt32 rgfChatPermissionOfficer, UInt32 rgfChatPermissionMember, UInt32 rgfChatPermissionAll );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeCreateChatRoomEUSECCCUUU( IntPtr thisptr, EChatRoomType eType, UInt64 ulGameID, IntPtr pchName, ELobbyType eLobbyType, UInt64 steamIDClan, UInt64 steamIDFriendChat, UInt64 steamIDInvited, UInt32 rgfChatPermissionOfficer, UInt32 rgfChatPermissionMember, UInt32 rgfChatPermissionAll );
 		public void CreateChatRoom( EChatRoomType eType, UInt64 ulGameID, string pchName, ELobbyType eLobbyType, CSteamID steamIDClan, CSteamID steamIDFriendChat, CSteamID steamIDInvited, UInt32 rgfChatPermissionOfficer, UInt32 rgfChatPermissionMember, UInt32 rgfChatPermissionAll ) 
 		{
-			this.GetFunction<NativeCreateChatRoomEUSECCCUUU>( this.Functions.CreateChatRoom125 )( this.ObjectAddress, eType, ulGameID, pchName, eLobbyType, steamIDClan.ConvertToUint64(), steamIDFriendChat.ConvertToUint64(), steamIDInvited.ConvertToUint64(), rgfChatPermissionOfficer, rgfChatPermissionMember, rgfChatPermissionAll ); 
+			this.GetFunction<NativeCreateChatRoomEUSECCCUUU>( this.Functions.CreateChatRoom125 )( this.ObjectAddress, eType, ulGameID, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), eLobbyType, steamIDClan.ConvertToUint64(), steamIDFriendChat.ConvertToUint64(), steamIDInvited.ConvertToUint64(), rgfChatPermissionOfficer, rgfChatPermissionMember, rgfChatPermissionAll ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeVoiceCallNewCC( IntPtr thisptr, UInt64 steamIDLocalPeer, UInt64 steamIDRemotePeer );
@@ -1209,7 +1209,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetMicDeviceName( IntPtr thisptr );
 		public string GetMicDeviceName(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetMicDeviceName>( this.Functions.GetMicDeviceName150 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetMicDeviceName>( this.Functions.GetMicDeviceName150 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeStartTalkingI( IntPtr thisptr, Int32 hVoiceCall );
@@ -1404,22 +1404,22 @@ namespace Steam4NET
 			return this.GetFunction<NativeIsInGameVoiceSpeaking>( this.Functions.IsInGameVoiceSpeaking181 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayS( IntPtr thisptr, string pchDialog );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayS( IntPtr thisptr, IntPtr pchDialog );
 		public void ActivateGameOverlay( string pchDialog ) 
 		{
-			this.GetFunction<NativeActivateGameOverlayS>( this.Functions.ActivateGameOverlay182 )( this.ObjectAddress, pchDialog ); 
+			this.GetFunction<NativeActivateGameOverlayS>( this.Functions.ActivateGameOverlay182 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchDialog ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayToUserSC( IntPtr thisptr, string pchDialog, UInt64 steamID );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayToUserSC( IntPtr thisptr, IntPtr pchDialog, UInt64 steamID );
 		public void ActivateGameOverlayToUser( string pchDialog, CSteamID steamID ) 
 		{
-			this.GetFunction<NativeActivateGameOverlayToUserSC>( this.Functions.ActivateGameOverlayToUser183 )( this.ObjectAddress, pchDialog, steamID.ConvertToUint64() ); 
+			this.GetFunction<NativeActivateGameOverlayToUserSC>( this.Functions.ActivateGameOverlayToUser183 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchDialog ).GetMarshaledBytes(), steamID.ConvertToUint64() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayToWebPageS( IntPtr thisptr, string pchURL );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayToWebPageS( IntPtr thisptr, IntPtr pchURL );
 		public void ActivateGameOverlayToWebPage( string pchURL ) 
 		{
-			this.GetFunction<NativeActivateGameOverlayToWebPageS>( this.Functions.ActivateGameOverlayToWebPage184 )( this.ObjectAddress, pchURL ); 
+			this.GetFunction<NativeActivateGameOverlayToWebPageS>( this.Functions.ActivateGameOverlayToWebPage184 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchURL ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateGameOverlayToStoreUE( IntPtr thisptr, UInt32 nAppId, EOverlayToStoreFlag eFlag );
@@ -1440,10 +1440,10 @@ namespace Steam4NET
 			this.GetFunction<NativeNotifyGameOverlayStateChangedB>( this.Functions.NotifyGameOverlayStateChanged187 )( this.ObjectAddress, bActive ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeNotifyGameServerChangeRequestedSS( IntPtr thisptr, string pchServerAddress, string pchPassword );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeNotifyGameServerChangeRequestedSS( IntPtr thisptr, IntPtr pchServerAddress, IntPtr pchPassword );
 		public void NotifyGameServerChangeRequested( string pchServerAddress, string pchPassword ) 
 		{
-			this.GetFunction<NativeNotifyGameServerChangeRequestedSS>( this.Functions.NotifyGameServerChangeRequested188 )( this.ObjectAddress, pchServerAddress, pchPassword ); 
+			this.GetFunction<NativeNotifyGameServerChangeRequestedSS>( this.Functions.NotifyGameServerChangeRequested188 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchServerAddress ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchPassword ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -1454,10 +1454,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeNotifyRichPresenceJoinRequestedUCS( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend, string pchConnectString );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeNotifyRichPresenceJoinRequestedUCS( IntPtr thisptr, UInt32 nAppId, UInt64 steamIDFriend, IntPtr pchConnectString );
 		public bool NotifyRichPresenceJoinRequested( UInt32 nAppId, CSteamID steamIDFriend, string pchConnectString ) 
 		{
-			return this.GetFunction<NativeNotifyRichPresenceJoinRequestedUCS>( this.Functions.NotifyRichPresenceJoinRequested190 )( this.ObjectAddress, nAppId, steamIDFriend.ConvertToUint64(), pchConnectString ); 
+			return this.GetFunction<NativeNotifyRichPresenceJoinRequestedUCS>( this.Functions.NotifyRichPresenceJoinRequested190 )( this.ObjectAddress, nAppId, steamIDFriend.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchConnectString ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EClanRelationship NativeGetClanRelationshipC( IntPtr thisptr, UInt64 steamIDclan );
@@ -1563,17 +1563,17 @@ namespace Steam4NET
 			return this.GetFunction<NativeRequestFriendProfileInfoC>( this.Functions.RequestFriendProfileInfo207 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendProfileInfoCS( IntPtr thisptr, UInt64 steamIDFriend, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendProfileInfoCS( IntPtr thisptr, UInt64 steamIDFriend, IntPtr pchKey );
 		public string GetFriendProfileInfo( CSteamID steamIDFriend, string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendProfileInfoCS>( this.Functions.GetFriendProfileInfo208 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendProfileInfoCS>( this.Functions.GetFriendProfileInfo208 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInviteUserToGameCS( IntPtr thisptr, UInt64 steamIDFriend, string pchConnectString );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInviteUserToGameCS( IntPtr thisptr, UInt64 steamIDFriend, IntPtr pchConnectString );
 		public bool InviteUserToGame( CSteamID steamIDFriend, string pchConnectString ) 
 		{
-			return this.GetFunction<NativeInviteUserToGameCS>( this.Functions.InviteUserToGame209 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), pchConnectString ); 
+			return this.GetFunction<NativeInviteUserToGameCS>( this.Functions.InviteUserToGame209 )( this.ObjectAddress, steamIDFriend.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchConnectString ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetOnlineConsoleFriendCount( IntPtr thisptr );
@@ -1610,7 +1610,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFriendFacebookNameC( IntPtr thisptr, UInt64 steamIDFriend );
 		public string GetFriendFacebookName( CSteamID steamIDFriend ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFriendFacebookNameC>( this.Functions.GetFriendFacebookName215 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFriendFacebookNameC>( this.Functions.GetFriendFacebookName215 )( this.ObjectAddress, steamIDFriend.ConvertToUint64() ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeGetFriendFacebookIDC( IntPtr thisptr, UInt64 steamIDFriend );
@@ -1682,7 +1682,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetEmoticonNameI( IntPtr thisptr, Int32 iEmoticon );
 		public string GetEmoticonName( Int32 iEmoticon ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetEmoticonNameI>( this.Functions.GetEmoticonName227 )( this.ObjectAddress, iEmoticon ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetEmoticonNameI>( this.Functions.GetEmoticonName227 )( this.ObjectAddress, iEmoticon ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeClientLinkFilterInit( IntPtr thisptr );
@@ -1691,10 +1691,10 @@ namespace Steam4NET
 			this.GetFunction<NativeClientLinkFilterInit>( this.Functions.ClientLinkFilterInit228 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeLinkDispositionS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeLinkDispositionS( IntPtr thisptr, IntPtr arg0 );
 		public UInt32 LinkDisposition( string arg0 ) 
 		{
-			return this.GetFunction<NativeLinkDispositionS>( this.Functions.LinkDisposition229 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeLinkDispositionS>( this.Functions.LinkDisposition229 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 	};

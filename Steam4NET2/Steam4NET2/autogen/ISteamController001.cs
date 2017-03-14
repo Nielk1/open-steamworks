@@ -18,14 +18,14 @@ namespace Steam4NET
 		private IntPtr DTorISteamController0016;
 	};
 	
-	[InteropHelp.InterfaceVersion("STEAMCONTROLLER_INTERFACE_VERSION")]
+	[InteropHelp.InterfaceVersion("SteamController001")]
 	public class ISteamController001 : InteropHelp.NativeWrapper<ISteamController001VTable>
 	{
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInitS( IntPtr thisptr, string pchAbsolutePathToControllerConfigVDF );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInitS( IntPtr thisptr, IntPtr pchAbsolutePathToControllerConfigVDF );
 		public bool Init( string pchAbsolutePathToControllerConfigVDF ) 
 		{
-			return this.GetFunction<NativeInitS>( this.Functions.Init0 )( this.ObjectAddress, pchAbsolutePathToControllerConfigVDF ); 
+			return this.GetFunction<NativeInitS>( this.Functions.Init0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchAbsolutePathToControllerConfigVDF ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -54,10 +54,10 @@ namespace Steam4NET
 			this.GetFunction<NativeTriggerHapticPulseUEU>( this.Functions.TriggerHapticPulse4 )( this.ObjectAddress, unControllerIndex, eTargetPad, usDurationMicroSec ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetOverrideModeS( IntPtr thisptr, string pchMode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetOverrideModeS( IntPtr thisptr, IntPtr pchMode );
 		public void SetOverrideMode( string pchMode ) 
 		{
-			this.GetFunction<NativeSetOverrideModeS>( this.Functions.SetOverrideMode5 )( this.ObjectAddress, pchMode ); 
+			this.GetFunction<NativeSetOverrideModeS>( this.Functions.SetOverrideMode5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchMode ).GetMarshaledBytes() ); 
 		}
 		
 	};

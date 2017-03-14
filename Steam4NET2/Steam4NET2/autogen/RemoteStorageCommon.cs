@@ -25,7 +25,8 @@ namespace Steam4NET
 		k_ERemoteStorageFileRootMacCaches = 13,
 		k_ERemoteStorageFileRootLinuxHome = 14,
 		k_ERemoteStorageFileRootLinuxXdgDataHome = 15,
-		k_ERemoteStorageFileRootMax = 16,
+		k_ERemoteStorageFileRootLinuxXdgConfigHome = 16,
+		k_ERemoteStorageFileRootMax = 17,
 	};
 	
 	public enum ERemoteStorageSyncState : int

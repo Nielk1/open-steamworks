@@ -72,13 +72,13 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetCurrentGameLanguage( IntPtr thisptr );
 		public string GetCurrentGameLanguage(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetCurrentGameLanguage>( this.Functions.GetCurrentGameLanguage4 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetCurrentGameLanguage>( this.Functions.GetCurrentGameLanguage4 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetAvailableGameLanguages( IntPtr thisptr );
 		public string GetAvailableGameLanguages(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetAvailableGameLanguages>( this.Functions.GetAvailableGameLanguages5 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetAvailableGameLanguages>( this.Functions.GetAvailableGameLanguages5 )( this.ObjectAddress ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -178,10 +178,10 @@ namespace Steam4NET
 			UInt64 ret = 0; this.GetFunction<NativeGetAppOwner>( this.Functions.GetAppOwner20 )( this.ObjectAddress, ref ret ); return new CSteamID(ret);
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLaunchQueryParamS( IntPtr thisptr, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLaunchQueryParamS( IntPtr thisptr, IntPtr pchKey );
 		public string GetLaunchQueryParam( string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetLaunchQueryParamS>( this.Functions.GetLaunchQueryParam21 )( this.ObjectAddress, pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetLaunchQueryParamS>( this.Functions.GetLaunchQueryParam21 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -203,10 +203,10 @@ namespace Steam4NET
 			this.GetFunction<NativeRequestAllProofOfPurchaseKeys>( this.Functions.RequestAllProofOfPurchaseKeys24 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileDetailsS( IntPtr thisptr, string pchUnk );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileDetailsS( IntPtr thisptr, IntPtr pchUnk );
 		public Int32 GetFileDetails( string pchUnk ) 
 		{
-			return this.GetFunction<NativeGetFileDetailsS>( this.Functions.GetFileDetails25 )( this.ObjectAddress, pchUnk ); 
+			return this.GetFunction<NativeGetFileDetailsS>( this.Functions.GetFileDetails25 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchUnk ).GetMarshaledBytes() ); 
 		}
 		
 	};

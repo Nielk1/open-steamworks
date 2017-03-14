@@ -118,10 +118,10 @@ namespace Steam4NET
 	
 	public class ISteamMatchmakingPlayersResponse : InteropHelp.NativeWrapper<ISteamMatchmakingPlayersResponseVTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddPlayerToListSIF( IntPtr thisptr, string pchName, Int32 nScore, float flTimePlayed );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddPlayerToListSIF( IntPtr thisptr, IntPtr pchName, Int32 nScore, float flTimePlayed );
 		public void AddPlayerToList( string pchName, Int32 nScore, float flTimePlayed ) 
 		{
-			this.GetFunction<NativeAddPlayerToListSIF>( this.Functions.AddPlayerToList0 )( this.ObjectAddress, pchName, nScore, flTimePlayed ); 
+			this.GetFunction<NativeAddPlayerToListSIF>( this.Functions.AddPlayerToList0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), nScore, flTimePlayed ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativePlayersFailedToRespond( IntPtr thisptr );
@@ -148,10 +148,10 @@ namespace Steam4NET
 	
 	public class ISteamMatchmakingRulesResponse : InteropHelp.NativeWrapper<ISteamMatchmakingRulesResponseVTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeRulesRespondedSS( IntPtr thisptr, string pchRule, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeRulesRespondedSS( IntPtr thisptr, IntPtr pchRule, IntPtr pchValue );
 		public void RulesResponded( string pchRule, string pchValue ) 
 		{
-			this.GetFunction<NativeRulesRespondedSS>( this.Functions.RulesResponded0 )( this.ObjectAddress, pchRule, pchValue ); 
+			this.GetFunction<NativeRulesRespondedSS>( this.Functions.RulesResponded0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchRule ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeRulesFailedToRespond( IntPtr thisptr );

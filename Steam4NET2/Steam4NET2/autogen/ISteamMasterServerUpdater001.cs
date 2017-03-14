@@ -54,10 +54,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetNextOutgoingPacketBIUU>( this.Functions.GetNextOutgoingPacket3 )( this.ObjectAddress, pOut, (Int32) pOut.Length, ref pNetAdr, ref pPort ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetBasicServerDataUBSSUBS( IntPtr thisptr, UInt16 nProtocolVersion, [MarshalAs(UnmanagedType.I1)] bool bDedicatedServer, string pRegionName, string pProductName, UInt16 nMaxReportedClients, [MarshalAs(UnmanagedType.I1)] bool bPasswordProtected, string pGameDescription );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetBasicServerDataUBSSUBS( IntPtr thisptr, UInt16 nProtocolVersion, [MarshalAs(UnmanagedType.I1)] bool bDedicatedServer, IntPtr pRegionName, IntPtr pProductName, UInt16 nMaxReportedClients, [MarshalAs(UnmanagedType.I1)] bool bPasswordProtected, IntPtr pGameDescription );
 		public void SetBasicServerData( UInt16 nProtocolVersion, bool bDedicatedServer, string pRegionName, string pProductName, UInt16 nMaxReportedClients, bool bPasswordProtected, string pGameDescription ) 
 		{
-			this.GetFunction<NativeSetBasicServerDataUBSSUBS>( this.Functions.SetBasicServerData4 )( this.ObjectAddress, nProtocolVersion, bDedicatedServer, pRegionName, pProductName, nMaxReportedClients, bPasswordProtected, pGameDescription ); 
+			this.GetFunction<NativeSetBasicServerDataUBSSUBS>( this.Functions.SetBasicServerData4 )( this.ObjectAddress, nProtocolVersion, bDedicatedServer, InteropHelp.Utf8StringToPtr( pRegionName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pProductName ).GetMarshaledBytes(), nMaxReportedClients, bPasswordProtected, InteropHelp.Utf8StringToPtr( pGameDescription ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeClearAllKeyValues( IntPtr thisptr );
@@ -66,10 +66,10 @@ namespace Steam4NET
 			this.GetFunction<NativeClearAllKeyValues>( this.Functions.ClearAllKeyValues5 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetKeyValueSS( IntPtr thisptr, string pKey, string pValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetKeyValueSS( IntPtr thisptr, IntPtr pKey, IntPtr pValue );
 		public void SetKeyValue( string pKey, string pValue ) 
 		{
-			this.GetFunction<NativeSetKeyValueSS>( this.Functions.SetKeyValue6 )( this.ObjectAddress, pKey, pValue ); 
+			this.GetFunction<NativeSetKeyValueSS>( this.Functions.SetKeyValue6 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pValue ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeNotifyShutdown( IntPtr thisptr );
@@ -92,17 +92,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAddMasterServerS( IntPtr thisptr, string pServerAddress );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAddMasterServerS( IntPtr thisptr, IntPtr pServerAddress );
 		public bool AddMasterServer( string pServerAddress ) 
 		{
-			return this.GetFunction<NativeAddMasterServerS>( this.Functions.AddMasterServer10 )( this.ObjectAddress, pServerAddress ); 
+			return this.GetFunction<NativeAddMasterServerS>( this.Functions.AddMasterServer10 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pServerAddress ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeRemoveMasterServerS( IntPtr thisptr, string pServerAddress );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeRemoveMasterServerS( IntPtr thisptr, IntPtr pServerAddress );
 		public bool RemoveMasterServer( string pServerAddress ) 
 		{
-			return this.GetFunction<NativeRemoveMasterServerS>( this.Functions.RemoveMasterServer11 )( this.ObjectAddress, pServerAddress ); 
+			return this.GetFunction<NativeRemoveMasterServerS>( this.Functions.RemoveMasterServer11 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pServerAddress ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetNumMasterServers( IntPtr thisptr );

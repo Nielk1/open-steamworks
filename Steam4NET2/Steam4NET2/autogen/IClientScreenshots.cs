@@ -49,13 +49,13 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetShortcutDisplayNameC( IntPtr thisptr, UInt64 gameID );
 		public string GetShortcutDisplayName( CGameID gameID ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetShortcutDisplayNameC>( this.Functions.GetShortcutDisplayName0 )( this.ObjectAddress, gameID.ConvertToUint64() ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetShortcutDisplayNameC>( this.Functions.GetShortcutDisplayName0 )( this.ObjectAddress, gameID.ConvertToUint64() ) ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetShortcutDisplayNameCS( IntPtr thisptr, UInt64 arg0, string cszName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetShortcutDisplayNameCS( IntPtr thisptr, UInt64 arg0, IntPtr cszName );
 		public void SetShortcutDisplayName( CGameID arg0, string cszName ) 
 		{
-			this.GetFunction<NativeSetShortcutDisplayNameCS>( this.Functions.SetShortcutDisplayName1 )( this.ObjectAddress, arg0.ConvertToUint64(), cszName ); 
+			this.GetFunction<NativeSetShortcutDisplayNameCS>( this.Functions.SetShortcutDisplayName1 )( this.ObjectAddress, arg0.ConvertToUint64(), InteropHelp.Utf8StringToPtr( cszName ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeWriteScreenshotCBUII( IntPtr thisptr, UInt64 gameID, Byte[] pubRGBData, UInt32 uRGBDataSize, Int32 iWidth, Int32 iHeight );
@@ -64,10 +64,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeWriteScreenshotCBUII>( this.Functions.WriteScreenshot2 )( this.ObjectAddress, gameID.ConvertToUint64(), pubRGBData, (UInt32) pubRGBData.Length, iWidth, iHeight ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeAddScreenshotToLibraryCSSII( IntPtr thisptr, UInt64 gameID, string cszScreenshotPath, string cszThumbnailPath, Int32 iWidth, Int32 iHeight );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeAddScreenshotToLibraryCSSII( IntPtr thisptr, UInt64 gameID, IntPtr cszScreenshotPath, IntPtr cszThumbnailPath, Int32 iWidth, Int32 iHeight );
 		public UInt32 AddScreenshotToLibrary( CGameID gameID, string cszScreenshotPath, string cszThumbnailPath, Int32 iWidth, Int32 iHeight ) 
 		{
-			return this.GetFunction<NativeAddScreenshotToLibraryCSSII>( this.Functions.AddScreenshotToLibrary3 )( this.ObjectAddress, gameID.ConvertToUint64(), cszScreenshotPath, cszThumbnailPath, iWidth, iHeight ); 
+			return this.GetFunction<NativeAddScreenshotToLibraryCSSII>( this.Functions.AddScreenshotToLibrary3 )( this.ObjectAddress, gameID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( cszScreenshotPath ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( cszThumbnailPath ).GetMarshaledBytes(), iWidth, iHeight ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeTriggerScreenshotC( IntPtr thisptr, UInt64 gameID );
@@ -83,10 +83,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLocationCUS( IntPtr thisptr, UInt64 gameID, UInt32 hScreenshot, string cszLocation );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLocationCUS( IntPtr thisptr, UInt64 gameID, UInt32 hScreenshot, IntPtr cszLocation );
 		public bool SetLocation( CGameID gameID, UInt32 hScreenshot, string cszLocation ) 
 		{
-			return this.GetFunction<NativeSetLocationCUS>( this.Functions.SetLocation6 )( this.ObjectAddress, gameID.ConvertToUint64(), hScreenshot, cszLocation ); 
+			return this.GetFunction<NativeSetLocationCUS>( this.Functions.SetLocation6 )( this.ObjectAddress, gameID.ConvertToUint64(), hScreenshot, InteropHelp.Utf8StringToPtr( cszLocation ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -155,10 +155,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLocalScreenshotCaptionCUS( IntPtr thisptr, UInt64 gameID, UInt32 hScreenshot, string cszCaption );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLocalScreenshotCaptionCUS( IntPtr thisptr, UInt64 gameID, UInt32 hScreenshot, IntPtr cszCaption );
 		public bool SetLocalScreenshotCaption( CGameID gameID, UInt32 hScreenshot, string cszCaption ) 
 		{
-			return this.GetFunction<NativeSetLocalScreenshotCaptionCUS>( this.Functions.SetLocalScreenshotCaption17 )( this.ObjectAddress, gameID.ConvertToUint64(), hScreenshot, cszCaption ); 
+			return this.GetFunction<NativeSetLocalScreenshotCaptionCUS>( this.Functions.SetLocalScreenshotCaption17 )( this.ObjectAddress, gameID.ConvertToUint64(), hScreenshot, InteropHelp.Utf8StringToPtr( cszCaption ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

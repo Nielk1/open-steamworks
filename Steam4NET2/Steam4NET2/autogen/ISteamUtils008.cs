@@ -70,7 +70,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetIPCountry( IntPtr thisptr );
 		public string GetIPCountry(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry4 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry4 )( this.ObjectAddress ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -164,17 +164,17 @@ namespace Steam4NET
 			return this.GetFunction<NativeBOverlayNeedsPresent>( this.Functions.BOverlayNeedsPresent18 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckFileSignatureS( IntPtr thisptr, string szFileName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckFileSignatureS( IntPtr thisptr, IntPtr szFileName );
 		public UInt64 CheckFileSignature( string szFileName ) 
 		{
-			return this.GetFunction<NativeCheckFileSignatureS>( this.Functions.CheckFileSignature19 )( this.ObjectAddress, szFileName ); 
+			return this.GetFunction<NativeCheckFileSignatureS>( this.Functions.CheckFileSignature19 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( szFileName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeShowGamepadTextInputEESUS( IntPtr thisptr, EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, string pchDescription, UInt32 unCharMax, string pchExistingText );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeShowGamepadTextInputEESUS( IntPtr thisptr, EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, IntPtr pchDescription, UInt32 unCharMax, IntPtr pchExistingText );
 		public bool ShowGamepadTextInput( EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, string pchDescription, UInt32 unCharMax, string pchExistingText ) 
 		{
-			return this.GetFunction<NativeShowGamepadTextInputEESUS>( this.Functions.ShowGamepadTextInput20 )( this.ObjectAddress, eInputMode, eInputLineMode, pchDescription, unCharMax, pchExistingText ); 
+			return this.GetFunction<NativeShowGamepadTextInputEESUS>( this.Functions.ShowGamepadTextInput20 )( this.ObjectAddress, eInputMode, eInputLineMode, InteropHelp.Utf8StringToPtr( pchDescription ).GetMarshaledBytes(), unCharMax, InteropHelp.Utf8StringToPtr( pchExistingText ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetEnteredGamepadTextLength( IntPtr thisptr );
@@ -193,7 +193,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetSteamUILanguage( IntPtr thisptr );
 		public string GetSteamUILanguage(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetSteamUILanguage>( this.Functions.GetSteamUILanguage23 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetSteamUILanguage>( this.Functions.GetSteamUILanguage23 )( this.ObjectAddress ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

@@ -107,6 +107,14 @@ namespace Steam4NET
 		k_EResultRefundToWallet = 98,
 		k_EResultEmailSendFailure = 99,
 		k_EResultNotSettled = 100,
+		k_EResultNeedsCaptcha = 101,
+		k_EResultGameserverLoginTokenDenied = 102,
+		k_EResultGameserverLoginTokenOwnerDenied = 103,
+		k_EResultInvalidItemType = 104,
+		k_EResultIPAddressBanned = 105,
+		k_EResultGameserverLoginTokenExpired = 106,
+		k_EResultInsufficientFunds = 107,
+		k_EResultTooManyPending = 108,
 	};
 	
 }

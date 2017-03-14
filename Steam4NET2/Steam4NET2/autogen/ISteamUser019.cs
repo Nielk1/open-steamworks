@@ -73,10 +73,10 @@ namespace Steam4NET
 			this.GetFunction<NativeTerminateGameConnectionUU>( this.Functions.TerminateGameConnection4 )( this.ObjectAddress, unIPServer, usPortServer ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeTrackAppUsageEventCES( IntPtr thisptr, UInt64 gameID, EAppUsageEvent eAppUsageEvent, string pchExtraInfo );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeTrackAppUsageEventCES( IntPtr thisptr, UInt64 gameID, EAppUsageEvent eAppUsageEvent, IntPtr pchExtraInfo );
 		public void TrackAppUsageEvent( CGameID gameID, EAppUsageEvent eAppUsageEvent, string pchExtraInfo ) 
 		{
-			this.GetFunction<NativeTrackAppUsageEventCES>( this.Functions.TrackAppUsageEvent5 )( this.ObjectAddress, gameID.ConvertToUint64(), eAppUsageEvent, pchExtraInfo ); 
+			this.GetFunction<NativeTrackAppUsageEventCES>( this.Functions.TrackAppUsageEvent5 )( this.ObjectAddress, gameID.ConvertToUint64(), eAppUsageEvent, InteropHelp.Utf8StringToPtr( pchExtraInfo ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -190,10 +190,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetPlayerSteamLevel>( this.Functions.GetPlayerSteamLevel23 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeRequestStoreAuthURLS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeRequestStoreAuthURLS( IntPtr thisptr, IntPtr arg0 );
 		public UInt64 RequestStoreAuthURL( string arg0 ) 
 		{
-			return this.GetFunction<NativeRequestStoreAuthURLS>( this.Functions.RequestStoreAuthURL24 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeRequestStoreAuthURLS>( this.Functions.RequestStoreAuthURL24 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

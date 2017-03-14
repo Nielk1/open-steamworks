@@ -131,38 +131,38 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetEmailS( IntPtr thisptr, string pchEmail );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetEmailS( IntPtr thisptr, IntPtr pchEmail );
 		public bool SetEmail( string pchEmail ) 
 		{
-			return this.GetFunction<NativeSetEmailS>( this.Functions.SetEmail12 )( this.ObjectAddress, pchEmail ); 
+			return this.GetFunction<NativeSetEmailS>( this.Functions.SetEmail12 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchEmail ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryStringESS( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryStringESS( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, IntPtr pchValue );
 		public bool SetRegistryString( ERegistrySubTree eRegistrySubTree, string pchKey, string pchValue ) 
 		{
-			return this.GetFunction<NativeSetRegistryStringESS>( this.Functions.SetRegistryString13 )( this.ObjectAddress, eRegistrySubTree, pchKey, pchValue ); 
+			return this.GetFunction<NativeSetRegistryStringESS>( this.Functions.SetRegistryString13 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryStringESSI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, StringBuilder pchValue, Int32 cbValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryStringESSI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, StringBuilder pchValue, Int32 cbValue );
 		public bool GetRegistryString( ERegistrySubTree eRegistrySubTree, string pchKey, StringBuilder pchValue ) 
 		{
-			return this.GetFunction<NativeGetRegistryStringESSI>( this.Functions.GetRegistryString14 )( this.ObjectAddress, eRegistrySubTree, pchKey, pchValue, (Int32) pchValue.Capacity ); 
+			return this.GetFunction<NativeGetRegistryStringESSI>( this.Functions.GetRegistryString14 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), pchValue, (Int32) pchValue.Capacity ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, Int32 iValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, Int32 iValue );
 		public bool SetRegistryInt( ERegistrySubTree eRegistrySubTree, string pchKey, Int32 iValue ) 
 		{
-			return this.GetFunction<NativeSetRegistryIntESI>( this.Functions.SetRegistryInt15 )( this.ObjectAddress, eRegistrySubTree, pchKey, iValue ); 
+			return this.GetFunction<NativeSetRegistryIntESI>( this.Functions.SetRegistryInt15 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), iValue ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, ref Int32 piValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, ref Int32 piValue );
 		public bool GetRegistryInt( ERegistrySubTree eRegistrySubTree, string pchKey, ref Int32 piValue ) 
 		{
-			return this.GetFunction<NativeGetRegistryIntESI>( this.Functions.GetRegistryInt16 )( this.ObjectAddress, eRegistrySubTree, pchKey, ref piValue ); 
+			return this.GetFunction<NativeGetRegistryIntESI>( this.Functions.GetRegistryInt16 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), ref piValue ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeInitiateGameConnectionBICCUUB( IntPtr thisptr, Byte[] pBlob, Int32 cbMaxBlob, UInt64 steamID, UInt64 nGameAppID, UInt32 unIPServer, UInt16 usPortServer, [MarshalAs(UnmanagedType.I1)] bool bSecure );
@@ -197,10 +197,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSendGuestPassByEmailSUB( IntPtr thisptr, string pchEmailAccount, UInt64 gidGuestPassID, [MarshalAs(UnmanagedType.I1)] bool bResending );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSendGuestPassByEmailSUB( IntPtr thisptr, IntPtr pchEmailAccount, UInt64 gidGuestPassID, [MarshalAs(UnmanagedType.I1)] bool bResending );
 		public bool SendGuestPassByEmail( string pchEmailAccount, UInt64 gidGuestPassID, bool bResending ) 
 		{
-			return this.GetFunction<NativeSendGuestPassByEmailSUB>( this.Functions.SendGuestPassByEmail22 )( this.ObjectAddress, pchEmailAccount, gidGuestPassID, bResending ); 
+			return this.GetFunction<NativeSendGuestPassByEmailSUB>( this.Functions.SendGuestPassByEmail22 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchEmailAccount ).GetMarshaledBytes(), gidGuestPassID, bResending ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -211,17 +211,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAckGuestPassS( IntPtr thisptr, string pchGuestPassCode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAckGuestPassS( IntPtr thisptr, IntPtr pchGuestPassCode );
 		public bool AckGuestPass( string pchGuestPassCode ) 
 		{
-			return this.GetFunction<NativeAckGuestPassS>( this.Functions.AckGuestPass24 )( this.ObjectAddress, pchGuestPassCode ); 
+			return this.GetFunction<NativeAckGuestPassS>( this.Functions.AckGuestPass24 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGuestPassCode ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeRedeemGuestPassS( IntPtr thisptr, string pchGuestPassCode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeRedeemGuestPassS( IntPtr thisptr, IntPtr pchGuestPassCode );
 		public bool RedeemGuestPass( string pchGuestPassCode ) 
 		{
-			return this.GetFunction<NativeRedeemGuestPassS>( this.Functions.RedeemGuestPass25 )( this.ObjectAddress, pchGuestPassCode ); 
+			return this.GetFunction<NativeRedeemGuestPassS>( this.Functions.RedeemGuestPass25 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGuestPassCode ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetGuestPassToGiveCount( IntPtr thisptr );
@@ -270,35 +270,35 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetGuestPassToRedeemSenderNameUSI>( this.Functions.GetGuestPassToRedeemSenderName32 )( this.ObjectAddress, nPassIndex, pchSenderName, (Int32) pchSenderName.Capacity ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAcknowledgeMessageByGIDS( IntPtr thisptr, string pchMessageGID );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAcknowledgeMessageByGIDS( IntPtr thisptr, IntPtr pchMessageGID );
 		public void AcknowledgeMessageByGID( string pchMessageGID ) 
 		{
-			this.GetFunction<NativeAcknowledgeMessageByGIDS>( this.Functions.AcknowledgeMessageByGID33 )( this.ObjectAddress, pchMessageGID ); 
+			this.GetFunction<NativeAcknowledgeMessageByGIDS>( this.Functions.AcknowledgeMessageByGID33 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchMessageGID ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLanguageS( IntPtr thisptr, string pchLanguage );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLanguageS( IntPtr thisptr, IntPtr pchLanguage );
 		public bool SetLanguage( string pchLanguage ) 
 		{
-			return this.GetFunction<NativeSetLanguageS>( this.Functions.SetLanguage34 )( this.ObjectAddress, pchLanguage ); 
+			return this.GetFunction<NativeSetLanguageS>( this.Functions.SetLanguage34 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchLanguage ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeTrackAppUsageEventCES( IntPtr thisptr, UInt64 gameID, EAppUsageEvent eAppUsageEvent, string pchExtraInfo );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeTrackAppUsageEventCES( IntPtr thisptr, UInt64 gameID, EAppUsageEvent eAppUsageEvent, IntPtr pchExtraInfo );
 		public void TrackAppUsageEvent( CGameID gameID, EAppUsageEvent eAppUsageEvent, string pchExtraInfo ) 
 		{
-			this.GetFunction<NativeTrackAppUsageEventCES>( this.Functions.TrackAppUsageEvent35 )( this.ObjectAddress, gameID.ConvertToUint64(), eAppUsageEvent, pchExtraInfo ); 
+			this.GetFunction<NativeTrackAppUsageEventCES>( this.Functions.TrackAppUsageEvent35 )( this.ObjectAddress, gameID.ConvertToUint64(), eAppUsageEvent, InteropHelp.Utf8StringToPtr( pchExtraInfo ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetAccountNameS( IntPtr thisptr, string pchAccountName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetAccountNameS( IntPtr thisptr, IntPtr pchAccountName );
 		public void SetAccountName( string pchAccountName ) 
 		{
-			this.GetFunction<NativeSetAccountNameS>( this.Functions.SetAccountName36 )( this.ObjectAddress, pchAccountName ); 
+			this.GetFunction<NativeSetAccountNameS>( this.Functions.SetAccountName36 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchAccountName ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetPasswordS( IntPtr thisptr, string pchPassword );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetPasswordS( IntPtr thisptr, IntPtr pchPassword );
 		public void SetPassword( string pchPassword ) 
 		{
-			this.GetFunction<NativeSetPasswordS>( this.Functions.SetPassword37 )( this.ObjectAddress, pchPassword ); 
+			this.GetFunction<NativeSetPasswordS>( this.Functions.SetPassword37 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchPassword ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetAccountCreationTimeU( IntPtr thisptr, UInt32 rtime32Time );

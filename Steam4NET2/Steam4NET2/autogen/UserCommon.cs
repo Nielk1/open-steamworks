@@ -63,6 +63,12 @@ namespace Steam4NET
 	
 	public enum ELauncherType : int
 	{
+		k_ELauncherTypeDefault = 0,
+		k_ELauncherTypePw_dota2 = 1,
+		k_ELauncherTypeNexon_dota2 = 2,
+		k_ELauncherTypeSteamcmd = 3,
+		k_ELauncherTypePw_csgo = 4,
+		k_ELauncherTypeClientui = 5,
 	};
 	
 	public enum EVACBan : int

@@ -60,28 +60,28 @@ namespace Steam4NET
 	public class ISteamGameServer012 : InteropHelp.NativeWrapper<ISteamGameServer012VTable>
 	{
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInitGameServerUUUUUS( IntPtr thisptr, UInt32 unGameIP, UInt16 unGamePort, UInt16 usQueryPort, UInt32 unServerFlags, UInt32 nAppID, string pchVersion );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInitGameServerUUUUUS( IntPtr thisptr, UInt32 unGameIP, UInt16 unGamePort, UInt16 usQueryPort, UInt32 unServerFlags, UInt32 nAppID, IntPtr pchVersion );
 		public bool InitGameServer( UInt32 unGameIP, UInt16 unGamePort, UInt16 usQueryPort, UInt32 unServerFlags, UInt32 nAppID, string pchVersion ) 
 		{
-			return this.GetFunction<NativeInitGameServerUUUUUS>( this.Functions.InitGameServer0 )( this.ObjectAddress, unGameIP, unGamePort, usQueryPort, unServerFlags, nAppID, pchVersion ); 
+			return this.GetFunction<NativeInitGameServerUUUUUS>( this.Functions.InitGameServer0 )( this.ObjectAddress, unGameIP, unGamePort, usQueryPort, unServerFlags, nAppID, InteropHelp.Utf8StringToPtr( pchVersion ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetProductS( IntPtr thisptr, string pchProductName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetProductS( IntPtr thisptr, IntPtr pchProductName );
 		public void SetProduct( string pchProductName ) 
 		{
-			this.GetFunction<NativeSetProductS>( this.Functions.SetProduct1 )( this.ObjectAddress, pchProductName ); 
+			this.GetFunction<NativeSetProductS>( this.Functions.SetProduct1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchProductName ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameDescriptionS( IntPtr thisptr, string pchGameDescription );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameDescriptionS( IntPtr thisptr, IntPtr pchGameDescription );
 		public void SetGameDescription( string pchGameDescription ) 
 		{
-			this.GetFunction<NativeSetGameDescriptionS>( this.Functions.SetGameDescription2 )( this.ObjectAddress, pchGameDescription ); 
+			this.GetFunction<NativeSetGameDescriptionS>( this.Functions.SetGameDescription2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGameDescription ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetModDirS( IntPtr thisptr, string pchModDir );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetModDirS( IntPtr thisptr, IntPtr pchModDir );
 		public void SetModDir( string pchModDir ) 
 		{
-			this.GetFunction<NativeSetModDirS>( this.Functions.SetModDir3 )( this.ObjectAddress, pchModDir ); 
+			this.GetFunction<NativeSetModDirS>( this.Functions.SetModDir3 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchModDir ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetDedicatedServerB( IntPtr thisptr, [MarshalAs(UnmanagedType.I1)] bool bDedicatedServer );
@@ -90,10 +90,10 @@ namespace Steam4NET
 			this.GetFunction<NativeSetDedicatedServerB>( this.Functions.SetDedicatedServer4 )( this.ObjectAddress, bDedicatedServer ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeLogOnS( IntPtr thisptr, string pszUnk );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeLogOnS( IntPtr thisptr, IntPtr pszUnk );
 		public void LogOn( string pszUnk ) 
 		{
-			this.GetFunction<NativeLogOnS>( this.Functions.LogOn5 )( this.ObjectAddress, pszUnk ); 
+			this.GetFunction<NativeLogOnS>( this.Functions.LogOn5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pszUnk ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeLogOnAnonymous( IntPtr thisptr );
@@ -147,16 +147,16 @@ namespace Steam4NET
 			this.GetFunction<NativeSetBotPlayerCountI>( this.Functions.SetBotPlayerCount13 )( this.ObjectAddress, cBotPlayers ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetServerNameS( IntPtr thisptr, string pszServerName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetServerNameS( IntPtr thisptr, IntPtr pszServerName );
 		public void SetServerName( string pszServerName ) 
 		{
-			this.GetFunction<NativeSetServerNameS>( this.Functions.SetServerName14 )( this.ObjectAddress, pszServerName ); 
+			this.GetFunction<NativeSetServerNameS>( this.Functions.SetServerName14 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pszServerName ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetMapNameS( IntPtr thisptr, string pszMapName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetMapNameS( IntPtr thisptr, IntPtr pszMapName );
 		public void SetMapName( string pszMapName ) 
 		{
-			this.GetFunction<NativeSetMapNameS>( this.Functions.SetMapName15 )( this.ObjectAddress, pszMapName ); 
+			this.GetFunction<NativeSetMapNameS>( this.Functions.SetMapName15 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pszMapName ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetPasswordProtectedB( IntPtr thisptr, [MarshalAs(UnmanagedType.I1)] bool bPasswordProtected );
@@ -171,10 +171,10 @@ namespace Steam4NET
 			this.GetFunction<NativeSetSpectatorPortU>( this.Functions.SetSpectatorPort17 )( this.ObjectAddress, unSpectatorPort ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetSpectatorServerNameS( IntPtr thisptr, string pszSpectatorServerName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetSpectatorServerNameS( IntPtr thisptr, IntPtr pszSpectatorServerName );
 		public void SetSpectatorServerName( string pszSpectatorServerName ) 
 		{
-			this.GetFunction<NativeSetSpectatorServerNameS>( this.Functions.SetSpectatorServerName18 )( this.ObjectAddress, pszSpectatorServerName ); 
+			this.GetFunction<NativeSetSpectatorServerNameS>( this.Functions.SetSpectatorServerName18 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pszSpectatorServerName ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeClearAllKeyValues( IntPtr thisptr );
@@ -183,28 +183,28 @@ namespace Steam4NET
 			this.GetFunction<NativeClearAllKeyValues>( this.Functions.ClearAllKeyValues19 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetKeyValueSS( IntPtr thisptr, string pKey, string pValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetKeyValueSS( IntPtr thisptr, IntPtr pKey, IntPtr pValue );
 		public void SetKeyValue( string pKey, string pValue ) 
 		{
-			this.GetFunction<NativeSetKeyValueSS>( this.Functions.SetKeyValue20 )( this.ObjectAddress, pKey, pValue ); 
+			this.GetFunction<NativeSetKeyValueSS>( this.Functions.SetKeyValue20 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pValue ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameTagsS( IntPtr thisptr, string pchGameTags );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameTagsS( IntPtr thisptr, IntPtr pchGameTags );
 		public void SetGameTags( string pchGameTags ) 
 		{
-			this.GetFunction<NativeSetGameTagsS>( this.Functions.SetGameTags21 )( this.ObjectAddress, pchGameTags ); 
+			this.GetFunction<NativeSetGameTagsS>( this.Functions.SetGameTags21 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGameTags ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameDataS( IntPtr thisptr, string pchGameData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameDataS( IntPtr thisptr, IntPtr pchGameData );
 		public void SetGameData( string pchGameData ) 
 		{
-			this.GetFunction<NativeSetGameDataS>( this.Functions.SetGameData22 )( this.ObjectAddress, pchGameData ); 
+			this.GetFunction<NativeSetGameDataS>( this.Functions.SetGameData22 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGameData ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetRegionS( IntPtr thisptr, string pchRegionName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetRegionS( IntPtr thisptr, IntPtr pchRegionName );
 		public void SetRegion( string pchRegionName ) 
 		{
-			this.GetFunction<NativeSetRegionS>( this.Functions.SetRegion23 )( this.ObjectAddress, pchRegionName ); 
+			this.GetFunction<NativeSetRegionS>( this.Functions.SetRegion23 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchRegionName ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeSendUserConnectAndAuthenticateUBUC( IntPtr thisptr, UInt32 unIPClient, Byte[] pvAuthBlob, UInt32 cubAuthBlobSize, ref UInt64 pSteamIDUser );
@@ -226,10 +226,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeBUpdateUserDataCSU( IntPtr thisptr, UInt64 steamIDUser, string pchPlayerName, UInt32 uScore );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeBUpdateUserDataCSU( IntPtr thisptr, UInt64 steamIDUser, IntPtr pchPlayerName, UInt32 uScore );
 		public bool BUpdateUserData( CSteamID steamIDUser, string pchPlayerName, UInt32 uScore ) 
 		{
-			return this.GetFunction<NativeBUpdateUserDataCSU>( this.Functions.BUpdateUserData27 )( this.ObjectAddress, steamIDUser.ConvertToUint64(), pchPlayerName, uScore ); 
+			return this.GetFunction<NativeBUpdateUserDataCSU>( this.Functions.BUpdateUserData27 )( this.ObjectAddress, steamIDUser.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchPlayerName ).GetMarshaledBytes(), uScore ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetAuthSessionTicketBIU( IntPtr thisptr, Byte[] pTicket, Int32 cbMaxTicket, ref UInt32 pcbTicket );

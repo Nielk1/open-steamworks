@@ -27,10 +27,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeWriteScreenshotBUII>( this.Functions.WriteScreenshot0 )( this.ObjectAddress, pubRGB, (UInt32) pubRGB.Length, nWidth, nHeight ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeAddScreenshotToLibrarySSII( IntPtr thisptr, string pchJpegOrTGAFilename, string pchJpegOrTGAThumbFilename, Int32 nWidth, Int32 nHeight );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeAddScreenshotToLibrarySSII( IntPtr thisptr, IntPtr pchJpegOrTGAFilename, IntPtr pchJpegOrTGAThumbFilename, Int32 nWidth, Int32 nHeight );
 		public UInt32 AddScreenshotToLibrary( string pchJpegOrTGAFilename, string pchJpegOrTGAThumbFilename, Int32 nWidth, Int32 nHeight ) 
 		{
-			return this.GetFunction<NativeAddScreenshotToLibrarySSII>( this.Functions.AddScreenshotToLibrary1 )( this.ObjectAddress, pchJpegOrTGAFilename, pchJpegOrTGAThumbFilename, nWidth, nHeight ); 
+			return this.GetFunction<NativeAddScreenshotToLibrarySSII>( this.Functions.AddScreenshotToLibrary1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchJpegOrTGAFilename ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchJpegOrTGAThumbFilename ).GetMarshaledBytes(), nWidth, nHeight ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeTriggerScreenshot( IntPtr thisptr );
@@ -46,10 +46,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLocationUS( IntPtr thisptr, UInt32 hScreenshot, string pchLocation );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLocationUS( IntPtr thisptr, UInt32 hScreenshot, IntPtr pchLocation );
 		public bool SetLocation( UInt32 hScreenshot, string pchLocation ) 
 		{
-			return this.GetFunction<NativeSetLocationUS>( this.Functions.SetLocation4 )( this.ObjectAddress, hScreenshot, pchLocation ); 
+			return this.GetFunction<NativeSetLocationUS>( this.Functions.SetLocation4 )( this.ObjectAddress, hScreenshot, InteropHelp.Utf8StringToPtr( pchLocation ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

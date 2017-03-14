@@ -32,10 +32,10 @@ namespace Steam4NET
 	[InteropHelp.InterfaceVersion("STEAMHTTP_INTERFACE_VERSION002")]
 	public class ISteamHTTP002 : InteropHelp.NativeWrapper<ISteamHTTP002VTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeCreateHTTPRequestES( IntPtr thisptr, EHTTPMethod eHTTPRequestMethod, string pchAbsoluteURL );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeCreateHTTPRequestES( IntPtr thisptr, EHTTPMethod eHTTPRequestMethod, IntPtr pchAbsoluteURL );
 		public UInt32 CreateHTTPRequest( EHTTPMethod eHTTPRequestMethod, string pchAbsoluteURL ) 
 		{
-			return this.GetFunction<NativeCreateHTTPRequestES>( this.Functions.CreateHTTPRequest0 )( this.ObjectAddress, eHTTPRequestMethod, pchAbsoluteURL ); 
+			return this.GetFunction<NativeCreateHTTPRequestES>( this.Functions.CreateHTTPRequest0 )( this.ObjectAddress, eHTTPRequestMethod, InteropHelp.Utf8StringToPtr( pchAbsoluteURL ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -53,17 +53,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetHTTPRequestHeaderValueUSS( IntPtr thisptr, UInt32 hRequest, string pchHeaderName, string pchHeaderValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetHTTPRequestHeaderValueUSS( IntPtr thisptr, UInt32 hRequest, IntPtr pchHeaderName, IntPtr pchHeaderValue );
 		public bool SetHTTPRequestHeaderValue( UInt32 hRequest, string pchHeaderName, string pchHeaderValue ) 
 		{
-			return this.GetFunction<NativeSetHTTPRequestHeaderValueUSS>( this.Functions.SetHTTPRequestHeaderValue3 )( this.ObjectAddress, hRequest, pchHeaderName, pchHeaderValue ); 
+			return this.GetFunction<NativeSetHTTPRequestHeaderValueUSS>( this.Functions.SetHTTPRequestHeaderValue3 )( this.ObjectAddress, hRequest, InteropHelp.Utf8StringToPtr( pchHeaderName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchHeaderValue ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetHTTPRequestGetOrPostParameterUSS( IntPtr thisptr, UInt32 hRequest, string pchParamName, string pchParamValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetHTTPRequestGetOrPostParameterUSS( IntPtr thisptr, UInt32 hRequest, IntPtr pchParamName, IntPtr pchParamValue );
 		public bool SetHTTPRequestGetOrPostParameter( UInt32 hRequest, string pchParamName, string pchParamValue ) 
 		{
-			return this.GetFunction<NativeSetHTTPRequestGetOrPostParameterUSS>( this.Functions.SetHTTPRequestGetOrPostParameter4 )( this.ObjectAddress, hRequest, pchParamName, pchParamValue ); 
+			return this.GetFunction<NativeSetHTTPRequestGetOrPostParameterUSS>( this.Functions.SetHTTPRequestGetOrPostParameter4 )( this.ObjectAddress, hRequest, InteropHelp.Utf8StringToPtr( pchParamName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchParamValue ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -95,17 +95,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetHTTPResponseHeaderSizeUSU( IntPtr thisptr, UInt32 hRequest, string pchHeaderName, ref UInt32 unResponseHeaderSize );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetHTTPResponseHeaderSizeUSU( IntPtr thisptr, UInt32 hRequest, IntPtr pchHeaderName, ref UInt32 unResponseHeaderSize );
 		public bool GetHTTPResponseHeaderSize( UInt32 hRequest, string pchHeaderName, ref UInt32 unResponseHeaderSize ) 
 		{
-			return this.GetFunction<NativeGetHTTPResponseHeaderSizeUSU>( this.Functions.GetHTTPResponseHeaderSize9 )( this.ObjectAddress, hRequest, pchHeaderName, ref unResponseHeaderSize ); 
+			return this.GetFunction<NativeGetHTTPResponseHeaderSizeUSU>( this.Functions.GetHTTPResponseHeaderSize9 )( this.ObjectAddress, hRequest, InteropHelp.Utf8StringToPtr( pchHeaderName ).GetMarshaledBytes(), ref unResponseHeaderSize ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetHTTPResponseHeaderValueUSBU( IntPtr thisptr, UInt32 hRequest, string pchHeaderName, Byte[] pHeaderValueBuffer, UInt32 unBufferSize );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetHTTPResponseHeaderValueUSBU( IntPtr thisptr, UInt32 hRequest, IntPtr pchHeaderName, Byte[] pHeaderValueBuffer, UInt32 unBufferSize );
 		public bool GetHTTPResponseHeaderValue( UInt32 hRequest, string pchHeaderName, Byte[] pHeaderValueBuffer ) 
 		{
-			return this.GetFunction<NativeGetHTTPResponseHeaderValueUSBU>( this.Functions.GetHTTPResponseHeaderValue10 )( this.ObjectAddress, hRequest, pchHeaderName, pHeaderValueBuffer, (UInt32) pHeaderValueBuffer.Length ); 
+			return this.GetFunction<NativeGetHTTPResponseHeaderValueUSBU>( this.Functions.GetHTTPResponseHeaderValue10 )( this.ObjectAddress, hRequest, InteropHelp.Utf8StringToPtr( pchHeaderName ).GetMarshaledBytes(), pHeaderValueBuffer, (UInt32) pHeaderValueBuffer.Length ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -144,10 +144,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetHTTPRequestRawPostBodyUSBU( IntPtr thisptr, UInt32 hRequest, string pchContentType, Byte[] pubBody, UInt32 unBodyLen );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetHTTPRequestRawPostBodyUSBU( IntPtr thisptr, UInt32 hRequest, IntPtr pchContentType, Byte[] pubBody, UInt32 unBodyLen );
 		public bool SetHTTPRequestRawPostBody( UInt32 hRequest, string pchContentType, Byte[] pubBody ) 
 		{
-			return this.GetFunction<NativeSetHTTPRequestRawPostBodyUSBU>( this.Functions.SetHTTPRequestRawPostBody16 )( this.ObjectAddress, hRequest, pchContentType, pubBody, (UInt32) pubBody.Length ); 
+			return this.GetFunction<NativeSetHTTPRequestRawPostBodyUSBU>( this.Functions.SetHTTPRequestRawPostBody16 )( this.ObjectAddress, hRequest, InteropHelp.Utf8StringToPtr( pchContentType ).GetMarshaledBytes(), pubBody, (UInt32) pubBody.Length ); 
 		}
 		
 	};

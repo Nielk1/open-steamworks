@@ -79,17 +79,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAddRequiredTagUS( IntPtr thisptr, UInt64 handle, string pTagName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAddRequiredTagUS( IntPtr thisptr, UInt64 handle, IntPtr pTagName );
 		public bool AddRequiredTag( UInt64 handle, string pTagName ) 
 		{
-			return this.GetFunction<NativeAddRequiredTagUS>( this.Functions.AddRequiredTag5 )( this.ObjectAddress, handle, pTagName ); 
+			return this.GetFunction<NativeAddRequiredTagUS>( this.Functions.AddRequiredTag5 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pTagName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAddExcludedTagUS( IntPtr thisptr, UInt64 handle, string pTagName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeAddExcludedTagUS( IntPtr thisptr, UInt64 handle, IntPtr pTagName );
 		public bool AddExcludedTag( UInt64 handle, string pTagName ) 
 		{
-			return this.GetFunction<NativeAddExcludedTagUS>( this.Functions.AddExcludedTag6 )( this.ObjectAddress, handle, pTagName ); 
+			return this.GetFunction<NativeAddExcludedTagUS>( this.Functions.AddExcludedTag6 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pTagName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -114,10 +114,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetCloudFileNameFilterUS( IntPtr thisptr, UInt64 handle, string pMatchCloudFileName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetCloudFileNameFilterUS( IntPtr thisptr, UInt64 handle, IntPtr pMatchCloudFileName );
 		public bool SetCloudFileNameFilter( UInt64 handle, string pMatchCloudFileName ) 
 		{
-			return this.GetFunction<NativeSetCloudFileNameFilterUS>( this.Functions.SetCloudFileNameFilter10 )( this.ObjectAddress, handle, pMatchCloudFileName ); 
+			return this.GetFunction<NativeSetCloudFileNameFilterUS>( this.Functions.SetCloudFileNameFilter10 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pMatchCloudFileName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -128,10 +128,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetSearchTextUS( IntPtr thisptr, UInt64 handle, string pSearchText );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetSearchTextUS( IntPtr thisptr, UInt64 handle, IntPtr pSearchText );
 		public bool SetSearchText( UInt64 handle, string pSearchText ) 
 		{
-			return this.GetFunction<NativeSetSearchTextUS>( this.Functions.SetSearchText12 )( this.ObjectAddress, handle, pSearchText ); 
+			return this.GetFunction<NativeSetSearchTextUS>( this.Functions.SetSearchText12 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pSearchText ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -160,17 +160,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemTitleUS( IntPtr thisptr, UInt64 handle, string pchTitle );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemTitleUS( IntPtr thisptr, UInt64 handle, IntPtr pchTitle );
 		public bool SetItemTitle( UInt64 handle, string pchTitle ) 
 		{
-			return this.GetFunction<NativeSetItemTitleUS>( this.Functions.SetItemTitle17 )( this.ObjectAddress, handle, pchTitle ); 
+			return this.GetFunction<NativeSetItemTitleUS>( this.Functions.SetItemTitle17 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pchTitle ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemDescriptionUS( IntPtr thisptr, UInt64 handle, string pchDescription );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemDescriptionUS( IntPtr thisptr, UInt64 handle, IntPtr pchDescription );
 		public bool SetItemDescription( UInt64 handle, string pchDescription ) 
 		{
-			return this.GetFunction<NativeSetItemDescriptionUS>( this.Functions.SetItemDescription18 )( this.ObjectAddress, handle, pchDescription ); 
+			return this.GetFunction<NativeSetItemDescriptionUS>( this.Functions.SetItemDescription18 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pchDescription ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -188,23 +188,23 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemContentUS( IntPtr thisptr, UInt64 handle, string pszContentFolder );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemContentUS( IntPtr thisptr, UInt64 handle, IntPtr pszContentFolder );
 		public bool SetItemContent( UInt64 handle, string pszContentFolder ) 
 		{
-			return this.GetFunction<NativeSetItemContentUS>( this.Functions.SetItemContent21 )( this.ObjectAddress, handle, pszContentFolder ); 
+			return this.GetFunction<NativeSetItemContentUS>( this.Functions.SetItemContent21 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pszContentFolder ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemPreviewUS( IntPtr thisptr, UInt64 handle, string pszPreviewFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetItemPreviewUS( IntPtr thisptr, UInt64 handle, IntPtr pszPreviewFile );
 		public bool SetItemPreview( UInt64 handle, string pszPreviewFile ) 
 		{
-			return this.GetFunction<NativeSetItemPreviewUS>( this.Functions.SetItemPreview22 )( this.ObjectAddress, handle, pszPreviewFile ); 
+			return this.GetFunction<NativeSetItemPreviewUS>( this.Functions.SetItemPreview22 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pszPreviewFile ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeSubmitItemUpdateUS( IntPtr thisptr, UInt64 handle, string pchChangeNote );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeSubmitItemUpdateUS( IntPtr thisptr, UInt64 handle, IntPtr pchChangeNote );
 		public UInt64 SubmitItemUpdate( UInt64 handle, string pchChangeNote ) 
 		{
-			return this.GetFunction<NativeSubmitItemUpdateUS>( this.Functions.SubmitItemUpdate23 )( this.ObjectAddress, handle, pchChangeNote ); 
+			return this.GetFunction<NativeSubmitItemUpdateUS>( this.Functions.SubmitItemUpdate23 )( this.ObjectAddress, handle, InteropHelp.Utf8StringToPtr( pchChangeNote ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EItemUpdateStatus NativeGetItemUpdateProgressUUU( IntPtr thisptr, UInt64 handle, ref UInt64 punBytesProcessed, ref UInt64 punBytesTotal );

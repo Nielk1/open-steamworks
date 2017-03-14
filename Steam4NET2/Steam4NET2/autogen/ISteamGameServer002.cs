@@ -104,17 +104,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeObsolete_GSSetStatusIUIIIISSSS( IntPtr thisptr, Int32 nAppIdServed, UInt32 unServerFlags, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, Int32 unGamePort, string pchServerName, string pchGameDir, string pchMapName, string pchVersion );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeObsolete_GSSetStatusIUIIIISSSS( IntPtr thisptr, Int32 nAppIdServed, UInt32 unServerFlags, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, Int32 unGamePort, IntPtr pchServerName, IntPtr pchGameDir, IntPtr pchMapName, IntPtr pchVersion );
 		public bool Obsolete_GSSetStatus( Int32 nAppIdServed, UInt32 unServerFlags, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, Int32 unGamePort, string pchServerName, string pchGameDir, string pchMapName, string pchVersion ) 
 		{
-			return this.GetFunction<NativeObsolete_GSSetStatusIUIIIISSSS>( this.Functions.Obsolete_GSSetStatus10 )( this.ObjectAddress, nAppIdServed, unServerFlags, cPlayers, cPlayersMax, cBotPlayers, unGamePort, pchServerName, pchGameDir, pchMapName, pchVersion ); 
+			return this.GetFunction<NativeObsolete_GSSetStatusIUIIIISSSS>( this.Functions.Obsolete_GSSetStatus10 )( this.ObjectAddress, nAppIdServed, unServerFlags, cPlayers, cPlayersMax, cBotPlayers, unGamePort, InteropHelp.Utf8StringToPtr( pchServerName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchGameDir ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchMapName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchVersion ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeUpdateStatusIIISS( IntPtr thisptr, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, string pchServerName, string pchMapName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeUpdateStatusIIISS( IntPtr thisptr, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, IntPtr pchServerName, IntPtr pchMapName );
 		public bool UpdateStatus( Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, string pchServerName, string pchMapName ) 
 		{
-			return this.GetFunction<NativeUpdateStatusIIISS>( this.Functions.UpdateStatus11 )( this.ObjectAddress, cPlayers, cPlayersMax, cBotPlayers, pchServerName, pchMapName ); 
+			return this.GetFunction<NativeUpdateStatusIIISS>( this.Functions.UpdateStatus11 )( this.ObjectAddress, cPlayers, cPlayersMax, cBotPlayers, InteropHelp.Utf8StringToPtr( pchServerName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchMapName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -131,24 +131,24 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetServerTypeIUUUSS( IntPtr thisptr, Int32 nGameAppId, UInt32 unServerFlags, UInt32 unGameIP, UInt32 unGamePort, string pchGameDir, string pchVersion );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetServerTypeIUUUSS( IntPtr thisptr, Int32 nGameAppId, UInt32 unServerFlags, UInt32 unGameIP, UInt32 unGamePort, IntPtr pchGameDir, IntPtr pchVersion );
 		public bool SetServerType( Int32 nGameAppId, UInt32 unServerFlags, UInt32 unGameIP, UInt32 unGamePort, string pchGameDir, string pchVersion ) 
 		{
-			return this.GetFunction<NativeSetServerTypeIUUUSS>( this.Functions.SetServerType14 )( this.ObjectAddress, nGameAppId, unServerFlags, unGameIP, unGamePort, pchGameDir, pchVersion ); 
+			return this.GetFunction<NativeSetServerTypeIUUUSS>( this.Functions.SetServerType14 )( this.ObjectAddress, nGameAppId, unServerFlags, unGameIP, unGamePort, InteropHelp.Utf8StringToPtr( pchGameDir ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchVersion ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetServerType2IUUUUUSSB( IntPtr thisptr, Int32 nGameAppId, UInt32 unServerFlags, UInt32 unGameIP, UInt16 unGamePort, UInt16 usSpectatorPort, UInt16 usQueryPort, string pchGameDir, string pchVersion, [MarshalAs(UnmanagedType.I1)] bool bLANMode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetServerType2IUUUUUSSB( IntPtr thisptr, Int32 nGameAppId, UInt32 unServerFlags, UInt32 unGameIP, UInt16 unGamePort, UInt16 usSpectatorPort, UInt16 usQueryPort, IntPtr pchGameDir, IntPtr pchVersion, [MarshalAs(UnmanagedType.I1)] bool bLANMode );
 		public bool SetServerType2( Int32 nGameAppId, UInt32 unServerFlags, UInt32 unGameIP, UInt16 unGamePort, UInt16 usSpectatorPort, UInt16 usQueryPort, string pchGameDir, string pchVersion, bool bLANMode ) 
 		{
-			return this.GetFunction<NativeSetServerType2IUUUUUSSB>( this.Functions.SetServerType215 )( this.ObjectAddress, nGameAppId, unServerFlags, unGameIP, unGamePort, usSpectatorPort, usQueryPort, pchGameDir, pchVersion, bLANMode ); 
+			return this.GetFunction<NativeSetServerType2IUUUUUSSB>( this.Functions.SetServerType215 )( this.ObjectAddress, nGameAppId, unServerFlags, unGameIP, unGamePort, usSpectatorPort, usQueryPort, InteropHelp.Utf8StringToPtr( pchGameDir ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchVersion ).GetMarshaledBytes(), bLANMode ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeUpdateStatus2IIISSS( IntPtr thisptr, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, string pchServerName, string pSpectatorServerName, string pchMapName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeUpdateStatus2IIISSS( IntPtr thisptr, Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, IntPtr pchServerName, IntPtr pSpectatorServerName, IntPtr pchMapName );
 		public bool UpdateStatus2( Int32 cPlayers, Int32 cPlayersMax, Int32 cBotPlayers, string pchServerName, string pSpectatorServerName, string pchMapName ) 
 		{
-			return this.GetFunction<NativeUpdateStatus2IIISSS>( this.Functions.UpdateStatus216 )( this.ObjectAddress, cPlayers, cPlayersMax, cBotPlayers, pchServerName, pSpectatorServerName, pchMapName ); 
+			return this.GetFunction<NativeUpdateStatus2IIISSS>( this.Functions.UpdateStatus216 )( this.ObjectAddress, cPlayers, cPlayersMax, cBotPlayers, InteropHelp.Utf8StringToPtr( pchServerName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pSpectatorServerName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchMapName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -159,10 +159,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetUserDataCSU( IntPtr thisptr, UInt64 steamIDUser, string pchPlayerName, UInt32 uScore );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetUserDataCSU( IntPtr thisptr, UInt64 steamIDUser, IntPtr pchPlayerName, UInt32 uScore );
 		public bool SetUserData( CSteamID steamIDUser, string pchPlayerName, UInt32 uScore ) 
 		{
-			return this.GetFunction<NativeSetUserDataCSU>( this.Functions.SetUserData18 )( this.ObjectAddress, steamIDUser.ConvertToUint64(), pchPlayerName, uScore ); 
+			return this.GetFunction<NativeSetUserDataCSU>( this.Functions.SetUserData18 )( this.ObjectAddress, steamIDUser.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchPlayerName ).GetMarshaledBytes(), uScore ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeUpdateSpectatorPortU( IntPtr thisptr, UInt16 unSpectatorPort );
@@ -171,10 +171,10 @@ namespace Steam4NET
 			this.GetFunction<NativeUpdateSpectatorPortU>( this.Functions.UpdateSpectatorPort19 )( this.ObjectAddress, unSpectatorPort ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameTypeS( IntPtr thisptr, string pchGameType );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetGameTypeS( IntPtr thisptr, IntPtr pchGameType );
 		public void SetGameType( string pchGameType ) 
 		{
-			this.GetFunction<NativeSetGameTypeS>( this.Functions.SetGameType20 )( this.ObjectAddress, pchGameType ); 
+			this.GetFunction<NativeSetGameTypeS>( this.Functions.SetGameType20 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchGameType ).GetMarshaledBytes() ); 
 		}
 		
 	};

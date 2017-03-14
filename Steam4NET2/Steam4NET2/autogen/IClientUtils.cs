@@ -63,7 +63,14 @@ namespace Steam4NET
 		public IntPtr IsSteamRunningInVR51;
 		public IntPtr BIsRunningOnAlienwareAlpha52;
 		public IntPtr StartVRDashboard53;
-		private IntPtr DTorIClientUtils54;
+		public IntPtr IsVRHeadsetStreamingEnabled54;
+		public IntPtr SetVRHeadsetStreamingEnabled55;
+		public IntPtr GenerateSupportSystemReport56;
+		public IntPtr GetSupportSystemReport57;
+		public IntPtr GetAppIdForPid58;
+		public IntPtr SetClientUIProcess59;
+		public IntPtr BIsClientUIInForeground60;
+		private IntPtr DTorIClientUtils61;
 	};
 	
 	[InteropHelp.InterfaceVersion("CLIENTUTILS_INTERFACE_VERSION001")]
@@ -72,19 +79,19 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetInstallPath( IntPtr thisptr );
 		public string GetInstallPath(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetInstallPath>( this.Functions.GetInstallPath0 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetInstallPath>( this.Functions.GetInstallPath0 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetUserBaseFolderInstallImage( IntPtr thisptr );
 		public string GetUserBaseFolderInstallImage(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetUserBaseFolderInstallImage>( this.Functions.GetUserBaseFolderInstallImage1 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetUserBaseFolderInstallImage>( this.Functions.GetUserBaseFolderInstallImage1 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetManagedContentRoot( IntPtr thisptr );
 		public string GetManagedContentRoot(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetManagedContentRoot>( this.Functions.GetManagedContentRoot2 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetManagedContentRoot>( this.Functions.GetManagedContentRoot2 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetSecondsSinceAppActive( IntPtr thisptr );
@@ -120,7 +127,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetIPCountry( IntPtr thisptr );
 		public string GetIPCountry(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry8 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry8 )( this.ObjectAddress ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -253,10 +260,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeBIsGlobalInstance>( this.Functions.BIsGlobalInstance28 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckFileSignatureS( IntPtr thisptr, string szFileName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckFileSignatureS( IntPtr thisptr, IntPtr szFileName );
 		public UInt64 CheckFileSignature( string szFileName ) 
 		{
-			return this.GetFunction<NativeCheckFileSignatureS>( this.Functions.CheckFileSignature29 )( this.ObjectAddress, szFileName ); 
+			return this.GetFunction<NativeCheckFileSignatureS>( this.Functions.CheckFileSignature29 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( szFileName ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeGetBuildID( IntPtr thisptr );
@@ -290,10 +297,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeShowGamepadTextInputEESUS( IntPtr thisptr, EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, string szText, UInt32 uMaxLength, string szUnk );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeShowGamepadTextInputEESUS( IntPtr thisptr, EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, IntPtr szText, UInt32 uMaxLength, IntPtr szUnk );
 		public bool ShowGamepadTextInput( EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, string szText, UInt32 uMaxLength, string szUnk ) 
 		{
-			return this.GetFunction<NativeShowGamepadTextInputEESUS>( this.Functions.ShowGamepadTextInput35 )( this.ObjectAddress, eInputMode, eInputLineMode, szText, uMaxLength, szUnk ); 
+			return this.GetFunction<NativeShowGamepadTextInputEESUS>( this.Functions.ShowGamepadTextInput35 )( this.ObjectAddress, eInputMode, eInputLineMode, InteropHelp.Utf8StringToPtr( szText ).GetMarshaledBytes(), uMaxLength, InteropHelp.Utf8StringToPtr( szUnk ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetEnteredGamepadTextLength( IntPtr thisptr );
@@ -309,10 +316,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetEnteredGamepadTextInputSU>( this.Functions.GetEnteredGamepadTextInput37 )( this.ObjectAddress, pchValue, (UInt32) pchValue.Capacity ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeGamepadTextInputClosedIBS( IntPtr thisptr, Int32 hSteamPipe, [MarshalAs(UnmanagedType.I1)] bool arg1, string arg2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeGamepadTextInputClosedIBS( IntPtr thisptr, Int32 hSteamPipe, [MarshalAs(UnmanagedType.I1)] bool arg1, IntPtr arg2 );
 		public void GamepadTextInputClosed( Int32 hSteamPipe, bool arg1, string arg2 ) 
 		{
-			this.GetFunction<NativeGamepadTextInputClosedIBS>( this.Functions.GamepadTextInputClosed38 )( this.ObjectAddress, hSteamPipe, arg1, arg2 ); 
+			this.GetFunction<NativeGamepadTextInputClosedIBS>( this.Functions.GamepadTextInputClosed38 )( this.ObjectAddress, hSteamPipe, arg1, InteropHelp.Utf8StringToPtr( arg2 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetSpewEII( IntPtr thisptr, ESpewGroup eSpewGroup, Int32 iSpewLevel, Int32 iLogLevel );
@@ -337,7 +344,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetSteamUILanguage( IntPtr thisptr );
 		public string GetSteamUILanguage(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetSteamUILanguage>( this.Functions.GetSteamUILanguage42 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetSteamUILanguage>( this.Functions.GetSteamUILanguage42 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckSteamReachable( IntPtr thisptr );
@@ -358,10 +365,10 @@ namespace Steam4NET
 			this.GetFunction<NativeSetVideoAdapterInfoIIIII>( this.Functions.SetVideoAdapterInfo45 )( this.ObjectAddress, arg0, arg1, arg2, arg3, arg4 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetControllerOverrideModeCS( IntPtr thisptr, UInt64 gameID, string szUnk );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetControllerOverrideModeCS( IntPtr thisptr, UInt64 gameID, IntPtr szUnk );
 		public void SetControllerOverrideMode( CGameID gameID, string szUnk ) 
 		{
-			this.GetFunction<NativeSetControllerOverrideModeCS>( this.Functions.SetControllerOverrideMode46 )( this.ObjectAddress, gameID.ConvertToUint64(), szUnk ); 
+			this.GetFunction<NativeSetControllerOverrideModeCS>( this.Functions.SetControllerOverrideMode46 )( this.ObjectAddress, gameID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( szUnk ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetOverlayWindowFocusForPipeBBC( IntPtr thisptr, [MarshalAs(UnmanagedType.I1)] bool arg0, [MarshalAs(UnmanagedType.I1)] bool arg1, UInt64 gameID );
@@ -377,17 +384,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetControllerConfigFileForAppIDUS( IntPtr thisptr, UInt32 unAppID, string pszControllerConfigFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetControllerConfigFileForAppIDUS( IntPtr thisptr, UInt32 unAppID, IntPtr pszControllerConfigFile );
 		public bool SetControllerConfigFileForAppID( UInt32 unAppID, string pszControllerConfigFile ) 
 		{
-			return this.GetFunction<NativeSetControllerConfigFileForAppIDUS>( this.Functions.SetControllerConfigFileForAppID49 )( this.ObjectAddress, unAppID, pszControllerConfigFile ); 
+			return this.GetFunction<NativeSetControllerConfigFileForAppIDUS>( this.Functions.SetControllerConfigFileForAppID49 )( this.ObjectAddress, unAppID, InteropHelp.Utf8StringToPtr( pszControllerConfigFile ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetControllerConfigFileForAppIDUSU( IntPtr thisptr, UInt32 unAppID, string pszControllerConfigFile, UInt32 cubControllerConfigFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetControllerConfigFileForAppIDUSU( IntPtr thisptr, UInt32 unAppID, IntPtr pszControllerConfigFile, UInt32 cubControllerConfigFile );
 		public bool GetControllerConfigFileForAppID( UInt32 unAppID, string pszControllerConfigFile, UInt32 cubControllerConfigFile ) 
 		{
-			return this.GetFunction<NativeGetControllerConfigFileForAppIDUSU>( this.Functions.GetControllerConfigFileForAppID50 )( this.ObjectAddress, unAppID, pszControllerConfigFile, cubControllerConfigFile ); 
+			return this.GetFunction<NativeGetControllerConfigFileForAppIDUSU>( this.Functions.GetControllerConfigFileForAppID50 )( this.ObjectAddress, unAppID, InteropHelp.Utf8StringToPtr( pszControllerConfigFile ).GetMarshaledBytes(), cubControllerConfigFile ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -408,6 +415,49 @@ namespace Steam4NET
 		public void StartVRDashboard(  ) 
 		{
 			this.GetFunction<NativeStartVRDashboard>( this.Functions.StartVRDashboard53 )( this.ObjectAddress ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeIsVRHeadsetStreamingEnabledU( IntPtr thisptr, UInt32 unk );
+		public Int32 IsVRHeadsetStreamingEnabled( UInt32 unk ) 
+		{
+			return this.GetFunction<NativeIsVRHeadsetStreamingEnabledU>( this.Functions.IsVRHeadsetStreamingEnabled54 )( this.ObjectAddress, unk ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeSetVRHeadsetStreamingEnabledUB( IntPtr thisptr, UInt32 unk, [MarshalAs(UnmanagedType.I1)] bool arg1 );
+		public Int32 SetVRHeadsetStreamingEnabled( UInt32 unk, bool arg1 ) 
+		{
+			return this.GetFunction<NativeSetVRHeadsetStreamingEnabledUB>( this.Functions.SetVRHeadsetStreamingEnabled55 )( this.ObjectAddress, unk, arg1 ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGenerateSupportSystemReport( IntPtr thisptr );
+		public Int32 GenerateSupportSystemReport(  ) 
+		{
+			return this.GetFunction<NativeGenerateSupportSystemReport>( this.Functions.GenerateSupportSystemReport56 )( this.ObjectAddress ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetSupportSystemReportSUBU( IntPtr thisptr, StringBuilder arg0, UInt32 unk, Byte[] unk_2, UInt32 unk_3 );
+		public Int32 GetSupportSystemReport( StringBuilder arg0, Byte[] unk_2 ) 
+		{
+			return this.GetFunction<NativeGetSupportSystemReportSUBU>( this.Functions.GetSupportSystemReport57 )( this.ObjectAddress, arg0, (UInt32) arg0.Capacity, unk_2, (UInt32) unk_2.Length ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetAppIdForPidU( IntPtr thisptr, UInt32 unk );
+		public Int32 GetAppIdForPid( UInt32 unk ) 
+		{
+			return this.GetFunction<NativeGetAppIdForPidU>( this.Functions.GetAppIdForPid58 )( this.ObjectAddress, unk ); 
+		}
+		
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeSetClientUIProcess( IntPtr thisptr );
+		public Int32 SetClientUIProcess(  ) 
+		{
+			return this.GetFunction<NativeSetClientUIProcess>( this.Functions.SetClientUIProcess59 )( this.ObjectAddress ); 
+		}
+		
+		[return: MarshalAs(UnmanagedType.I1)]
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeBIsClientUIInForeground( IntPtr thisptr );
+		public bool BIsClientUIInForeground(  ) 
+		{
+			return this.GetFunction<NativeBIsClientUIInForeground>( this.Functions.BIsClientUIInForeground60 )( this.ObjectAddress ); 
 		}
 		
 	};

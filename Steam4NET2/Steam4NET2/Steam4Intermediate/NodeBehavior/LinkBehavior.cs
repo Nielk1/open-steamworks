@@ -50,9 +50,12 @@ namespace Steam4Intermediate.NodeBehavior
             if (context_id != null && id != context_id)
             {
                 LinkBehavior linknode = generator.GetNodeByID(context_id) as LinkBehavior;
-                linknode.typeNode = this;
+                if (linknode != null)
+                {
+                    linknode.typeNode = this;
 
-                this.AddChild(linknode);
+                    this.AddChild(linknode);
+                }
             }
         }
 

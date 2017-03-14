@@ -17,10 +17,10 @@ namespace Steam4NET
 	[InteropHelp.InterfaceVersion("STEAMSTREAMLAUNCHER_INTERFACE_VERSION001")]
 	public class ISteamStreamLauncher001 : InteropHelp.NativeWrapper<ISteamStreamLauncher001VTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EStreamLauncherResult NativeStartStreamingS( IntPtr thisptr, string cszFilePath );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate EStreamLauncherResult NativeStartStreamingS( IntPtr thisptr, IntPtr cszFilePath );
 		public EStreamLauncherResult StartStreaming( string cszFilePath ) 
 		{
-			return this.GetFunction<NativeStartStreamingS>( this.Functions.StartStreaming0 )( this.ObjectAddress, cszFilePath ); 
+			return this.GetFunction<NativeStartStreamingS>( this.Functions.StartStreaming0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( cszFilePath ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeStopStreaming( IntPtr thisptr );

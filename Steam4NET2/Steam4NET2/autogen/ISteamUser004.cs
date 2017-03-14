@@ -136,10 +136,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetEmailS( IntPtr thisptr, string pchEmail );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetEmailS( IntPtr thisptr, IntPtr pchEmail );
 		public bool SetEmail( string pchEmail ) 
 		{
-			return this.GetFunction<NativeSetEmailS>( this.Functions.SetEmail15 )( this.ObjectAddress, pchEmail ); 
+			return this.GetFunction<NativeSetEmailS>( this.Functions.SetEmail15 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchEmail ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetSteamGameConnectTokenBI( IntPtr thisptr, Byte[] pBlob, Int32 cbMaxBlob );
@@ -149,31 +149,31 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryStringESS( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryStringESS( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, IntPtr pchValue );
 		public bool SetRegistryString( ERegistrySubTree eRegistrySubTree, string pchKey, string pchValue ) 
 		{
-			return this.GetFunction<NativeSetRegistryStringESS>( this.Functions.SetRegistryString17 )( this.ObjectAddress, eRegistrySubTree, pchKey, pchValue ); 
+			return this.GetFunction<NativeSetRegistryStringESS>( this.Functions.SetRegistryString17 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryStringESSI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, StringBuilder pchValue, Int32 cbValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryStringESSI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, StringBuilder pchValue, Int32 cbValue );
 		public bool GetRegistryString( ERegistrySubTree eRegistrySubTree, string pchKey, StringBuilder pchValue ) 
 		{
-			return this.GetFunction<NativeGetRegistryStringESSI>( this.Functions.GetRegistryString18 )( this.ObjectAddress, eRegistrySubTree, pchKey, pchValue, (Int32) pchValue.Capacity ); 
+			return this.GetFunction<NativeGetRegistryStringESSI>( this.Functions.GetRegistryString18 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), pchValue, (Int32) pchValue.Capacity ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, Int32 iValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, Int32 iValue );
 		public bool SetRegistryInt( ERegistrySubTree eRegistrySubTree, string pchKey, Int32 iValue ) 
 		{
-			return this.GetFunction<NativeSetRegistryIntESI>( this.Functions.SetRegistryInt19 )( this.ObjectAddress, eRegistrySubTree, pchKey, iValue ); 
+			return this.GetFunction<NativeSetRegistryIntESI>( this.Functions.SetRegistryInt19 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), iValue ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, string pchKey, ref Int32 piValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetRegistryIntESI( IntPtr thisptr, ERegistrySubTree eRegistrySubTree, IntPtr pchKey, ref Int32 piValue );
 		public bool GetRegistryInt( ERegistrySubTree eRegistrySubTree, string pchKey, ref Int32 piValue ) 
 		{
-			return this.GetFunction<NativeGetRegistryIntESI>( this.Functions.GetRegistryInt20 )( this.ObjectAddress, eRegistrySubTree, pchKey, ref piValue ); 
+			return this.GetFunction<NativeGetRegistryIntESI>( this.Functions.GetRegistryInt20 )( this.ObjectAddress, eRegistrySubTree, InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), ref piValue ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeInitiateGameConnectionBICIUUB( IntPtr thisptr, Byte[] pBlob, Int32 cbMaxBlob, UInt64 steamID, Int32 nGameAppID, UInt32 unIPServer, UInt16 usPortServer, [MarshalAs(UnmanagedType.I1)] bool bSecure );

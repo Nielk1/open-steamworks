@@ -34,6 +34,7 @@ namespace Steam4NET
 		private IntPtr DTorISteamController00422;
 	};
 	
+	[InteropHelp.InterfaceVersion("SteamController004")]
 	public class ISteamController004 : InteropHelp.NativeWrapper<ISteamController004VTable>
 	{
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -69,10 +70,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeShowBindingPanelU>( this.Functions.ShowBindingPanel4 )( this.ObjectAddress, arg0 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetActionSetHandleS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetActionSetHandleS( IntPtr thisptr, IntPtr arg0 );
 		public Int32 GetActionSetHandle( string arg0 ) 
 		{
-			return this.GetFunction<NativeGetActionSetHandleS>( this.Functions.GetActionSetHandle5 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeGetActionSetHandleS>( this.Functions.GetActionSetHandle5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeActivateActionSetUU( IntPtr thisptr, UInt64 arg0, UInt64 arg1 );
@@ -87,10 +88,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetCurrentActionSetU>( this.Functions.GetCurrentActionSet7 )( this.ObjectAddress, arg0 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetDigitalActionHandleS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetDigitalActionHandleS( IntPtr thisptr, IntPtr arg0 );
 		public Int32 GetDigitalActionHandle( string arg0 ) 
 		{
-			return this.GetFunction<NativeGetDigitalActionHandleS>( this.Functions.GetDigitalActionHandle8 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeGetDigitalActionHandleS>( this.Functions.GetDigitalActionHandle8 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetDigitalActionDataUU( IntPtr thisptr, UInt64 arg0, UInt64 arg1 );
@@ -105,10 +106,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetDigitalActionOriginsUUUE>( this.Functions.GetDigitalActionOrigins10 )( this.ObjectAddress, arg0, arg1, arg2, ref arg3 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetAnalogActionHandleS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetAnalogActionHandleS( IntPtr thisptr, IntPtr arg0 );
 		public Int32 GetAnalogActionHandle( string arg0 ) 
 		{
-			return this.GetFunction<NativeGetAnalogActionHandleS>( this.Functions.GetAnalogActionHandle11 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeGetAnalogActionHandleS>( this.Functions.GetAnalogActionHandle11 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetAnalogActionDataUU( IntPtr thisptr, UInt64 arg0, UInt64 arg1 );

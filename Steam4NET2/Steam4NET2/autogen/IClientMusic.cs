@@ -140,16 +140,16 @@ namespace Steam4NET
 			this.GetFunction<NativeRemoveQueueEntryIB>( this.Functions.RemoveQueueEntry9 )( this.ObjectAddress, iIndex, bUnk ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddAlbumToQueueSBB( IntPtr thisptr, string arg0, [MarshalAs(UnmanagedType.I1)] bool arg1, [MarshalAs(UnmanagedType.I1)] bool arg2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddAlbumToQueueSBB( IntPtr thisptr, IntPtr arg0, [MarshalAs(UnmanagedType.I1)] bool arg1, [MarshalAs(UnmanagedType.I1)] bool arg2 );
 		public void AddAlbumToQueue( string arg0, bool arg1, bool arg2 ) 
 		{
-			this.GetFunction<NativeAddAlbumToQueueSBB>( this.Functions.AddAlbumToQueue10 )( this.ObjectAddress, arg0, arg1, arg2 ); 
+			this.GetFunction<NativeAddAlbumToQueueSBB>( this.Functions.AddAlbumToQueue10 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddTrackToQueueSBBB( IntPtr thisptr, string arg0, [MarshalAs(UnmanagedType.I1)] bool arg1, [MarshalAs(UnmanagedType.I1)] bool arg2, [MarshalAs(UnmanagedType.I1)] bool arg3 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddTrackToQueueSBBB( IntPtr thisptr, IntPtr arg0, [MarshalAs(UnmanagedType.I1)] bool arg1, [MarshalAs(UnmanagedType.I1)] bool arg2, [MarshalAs(UnmanagedType.I1)] bool arg3 );
 		public void AddTrackToQueue( string arg0, bool arg1, bool arg2, bool arg3 ) 
 		{
-			this.GetFunction<NativeAddTrackToQueueSBBB>( this.Functions.AddTrackToQueue11 )( this.ObjectAddress, arg0, arg1, arg2, arg3 ); 
+			this.GetFunction<NativeAddTrackToQueueSBBB>( this.Functions.AddTrackToQueue11 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2, arg3 ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate AudioPlayback_Status NativeGetPlaybackStatus( IntPtr thisptr );
@@ -257,10 +257,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetLocalLibraryDirectoryEntryISI>( this.Functions.GetLocalLibraryDirectoryEntry28 )( this.ObjectAddress, arg0, arg1, arg2 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddLocalLibraryDirectoryEntryS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddLocalLibraryDirectoryEntryS( IntPtr thisptr, IntPtr arg0 );
 		public void AddLocalLibraryDirectoryEntry( string arg0 ) 
 		{
-			this.GetFunction<NativeAddLocalLibraryDirectoryEntryS>( this.Functions.AddLocalLibraryDirectoryEntry29 )( this.ObjectAddress, arg0 ); 
+			this.GetFunction<NativeAddLocalLibraryDirectoryEntryS>( this.Functions.AddLocalLibraryDirectoryEntry29 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeResetLocalLibraryDirectoriesB( IntPtr thisptr, [MarshalAs(UnmanagedType.I1)] bool arg0 );
@@ -295,16 +295,16 @@ namespace Steam4NET
 			return this.GetFunction<NativeBLocalLibraryIsCrawling>( this.Functions.BLocalLibraryIsCrawling34 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeCrawlAlbumS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeCrawlAlbumS( IntPtr thisptr, IntPtr arg0 );
 		public void CrawlAlbum( string arg0 ) 
 		{
-			this.GetFunction<NativeCrawlAlbumS>( this.Functions.CrawlAlbum35 )( this.ObjectAddress, arg0 ); 
+			this.GetFunction<NativeCrawlAlbumS>( this.Functions.CrawlAlbum35 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeCrawlTrackS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeCrawlTrackS( IntPtr thisptr, IntPtr arg0 );
 		public void CrawlTrack( string arg0 ) 
 		{
-			this.GetFunction<NativeCrawlTrackS>( this.Functions.CrawlTrack36 )( this.ObjectAddress, arg0 ); 
+			this.GetFunction<NativeCrawlTrackS>( this.Functions.CrawlTrack36 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryAlbumCount( IntPtr thisptr );
@@ -321,17 +321,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryAlbumEntrySSISIIB( IntPtr thisptr, string arg0, StringBuilder arg1, Int32 arg2, StringBuilder arg3, Int32 arg4, ref Int32 arg5, ref bool arg6 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryAlbumEntrySSISIIB( IntPtr thisptr, IntPtr arg0, StringBuilder arg1, Int32 arg2, StringBuilder arg3, Int32 arg4, ref Int32 arg5, ref bool arg6 );
 		public bool GetLocalLibraryAlbumEntry( string arg0, StringBuilder arg1, Int32 arg2, StringBuilder arg3, Int32 arg4, ref Int32 arg5, ref bool arg6 ) 
 		{
-			return this.GetFunction<NativeGetLocalLibraryAlbumEntrySSISIIB>( this.Functions.GetLocalLibraryAlbumEntry39 )( this.ObjectAddress, arg0, arg1, arg2, arg3, arg4, ref arg5, ref arg6 ); 
+			return this.GetFunction<NativeGetLocalLibraryAlbumEntrySSISIIB>( this.Functions.GetLocalLibraryAlbumEntry39 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2, arg3, arg4, ref arg5, ref arg6 ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryAlbumTrackEntrySISIISI( IntPtr thisptr, string arg0, Int32 arg1, StringBuilder arg2, Int32 arg3, ref Int32 arg4, StringBuilder arg5, Int32 arg6 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryAlbumTrackEntrySISIISI( IntPtr thisptr, IntPtr arg0, Int32 arg1, StringBuilder arg2, Int32 arg3, ref Int32 arg4, StringBuilder arg5, Int32 arg6 );
 		public bool GetLocalLibraryAlbumTrackEntry( string arg0, Int32 arg1, StringBuilder arg2, Int32 arg3, ref Int32 arg4, StringBuilder arg5, Int32 arg6 ) 
 		{
-			return this.GetFunction<NativeGetLocalLibraryAlbumTrackEntrySISIISI>( this.Functions.GetLocalLibraryAlbumTrackEntry40 )( this.ObjectAddress, arg0, arg1, arg2, arg3, ref arg4, arg5, arg6 ); 
+			return this.GetFunction<NativeGetLocalLibraryAlbumTrackEntrySISIISI>( this.Functions.GetLocalLibraryAlbumTrackEntry40 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2, arg3, ref arg4, arg5, arg6 ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryTrackCount( IntPtr thisptr );
@@ -341,16 +341,16 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryAlbumTrackKeySISI( IntPtr thisptr, string arg0, Int32 arg1, StringBuilder arg2, Int32 arg3 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryAlbumTrackKeySISI( IntPtr thisptr, IntPtr arg0, Int32 arg1, StringBuilder arg2, Int32 arg3 );
 		public bool GetLocalLibraryAlbumTrackKey( string arg0, Int32 arg1, StringBuilder arg2, Int32 arg3 ) 
 		{
-			return this.GetFunction<NativeGetLocalLibraryAlbumTrackKeySISI>( this.Functions.GetLocalLibraryAlbumTrackKey42 )( this.ObjectAddress, arg0, arg1, arg2, arg3 ); 
+			return this.GetFunction<NativeGetLocalLibraryAlbumTrackKeySISI>( this.Functions.GetLocalLibraryAlbumTrackKey42 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2, arg3 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryTrackCountForAlbumS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryTrackCountForAlbumS( IntPtr thisptr, IntPtr arg0 );
 		public Int32 GetLocalLibraryTrackCountForAlbum( string arg0 ) 
 		{
-			return this.GetFunction<NativeGetLocalLibraryTrackCountForAlbumS>( this.Functions.GetLocalLibraryTrackCountForAlbum43 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeGetLocalLibraryTrackCountForAlbumS>( this.Functions.GetLocalLibraryTrackCountForAlbum43 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryArtistCount( IntPtr thisptr );
@@ -366,17 +366,17 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetLocalLibraryArtistNameISI>( this.Functions.GetLocalLibraryArtistName45 )( this.ObjectAddress, arg0, arg1, arg2 ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryAlbumCountForArtistNameS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLocalLibraryAlbumCountForArtistNameS( IntPtr thisptr, IntPtr arg0 );
 		public Int32 GetLocalLibraryAlbumCountForArtistName( string arg0 ) 
 		{
-			return this.GetFunction<NativeGetLocalLibraryAlbumCountForArtistNameS>( this.Functions.GetLocalLibraryAlbumCountForArtistName46 )( this.ObjectAddress, arg0 ); 
+			return this.GetFunction<NativeGetLocalLibraryAlbumCountForArtistNameS>( this.Functions.GetLocalLibraryAlbumCountForArtistName46 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryArtistAlbumKeySISI( IntPtr thisptr, string arg0, Int32 arg1, StringBuilder arg2, Int32 arg3 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetLocalLibraryArtistAlbumKeySISI( IntPtr thisptr, IntPtr arg0, Int32 arg1, StringBuilder arg2, Int32 arg3 );
 		public bool GetLocalLibraryArtistAlbumKey( string arg0, Int32 arg1, StringBuilder arg2, Int32 arg3 ) 
 		{
-			return this.GetFunction<NativeGetLocalLibraryArtistAlbumKeySISI>( this.Functions.GetLocalLibraryArtistAlbumKey47 )( this.ObjectAddress, arg0, arg1, arg2, arg3 ); 
+			return this.GetFunction<NativeGetLocalLibraryArtistAlbumKeySISI>( this.Functions.GetLocalLibraryArtistAlbumKey47 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), arg1, arg2, arg3 ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeStartUsingSpotify( IntPtr thisptr );
@@ -397,10 +397,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeGetStatusSpotify>( this.Functions.GetStatusSpotify50 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeLoginSpotifySS( IntPtr thisptr, string arg0, string arg1 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeLoginSpotifySS( IntPtr thisptr, IntPtr arg0, IntPtr arg1 );
 		public void LoginSpotify( string arg0, string arg1 ) 
 		{
-			this.GetFunction<NativeLoginSpotifySS>( this.Functions.LoginSpotify51 )( this.ObjectAddress, arg0, arg1 ); 
+			this.GetFunction<NativeLoginSpotifySS>( this.Functions.LoginSpotify51 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( arg1 ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeReloginSpotify( IntPtr thisptr );
@@ -412,7 +412,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetCurrentUserSpotify( IntPtr thisptr );
 		public string GetCurrentUserSpotify(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetCurrentUserSpotify>( this.Functions.GetCurrentUserSpotify53 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetCurrentUserSpotify>( this.Functions.GetCurrentUserSpotify53 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeForgetCurrentUserSpotify( IntPtr thisptr );

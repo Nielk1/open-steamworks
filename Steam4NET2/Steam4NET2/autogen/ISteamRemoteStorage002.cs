@@ -23,29 +23,29 @@ namespace Steam4NET
 	public class ISteamRemoteStorage002 : InteropHelp.NativeWrapper<ISteamRemoteStorage002VTable>
 	{
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileWriteSBI( IntPtr thisptr, string pchFile, Byte[] pvData, Int32 cubData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileWriteSBI( IntPtr thisptr, IntPtr pchFile, Byte[] pvData, Int32 cubData );
 		public bool FileWrite( string pchFile, Byte[] pvData ) 
 		{
-			return this.GetFunction<NativeFileWriteSBI>( this.Functions.FileWrite0 )( this.ObjectAddress, pchFile, pvData, (Int32) pvData.Length ); 
+			return this.GetFunction<NativeFileWriteSBI>( this.Functions.FileWrite0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes(), pvData, (Int32) pvData.Length ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileSizeS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileSizeS( IntPtr thisptr, IntPtr pchFile );
 		public Int32 GetFileSize( string pchFile ) 
 		{
-			return this.GetFunction<NativeGetFileSizeS>( this.Functions.GetFileSize1 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeGetFileSizeS>( this.Functions.GetFileSize1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeFileReadSBI( IntPtr thisptr, string pchFile, Byte[] pvData, Int32 cubDataToRead );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeFileReadSBI( IntPtr thisptr, IntPtr pchFile, Byte[] pvData, Int32 cubDataToRead );
 		public Int32 FileRead( string pchFile, Byte[] pvData ) 
 		{
-			return this.GetFunction<NativeFileReadSBI>( this.Functions.FileRead2 )( this.ObjectAddress, pchFile, pvData, (Int32) pvData.Length ); 
+			return this.GetFunction<NativeFileReadSBI>( this.Functions.FileRead2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes(), pvData, (Int32) pvData.Length ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileExistsS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileExistsS( IntPtr thisptr, IntPtr pchFile );
 		public bool FileExists( string pchFile ) 
 		{
-			return this.GetFunction<NativeFileExistsS>( this.Functions.FileExists3 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeFileExistsS>( this.Functions.FileExists3 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileCount( IntPtr thisptr );
@@ -57,7 +57,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFileNameAndSizeII( IntPtr thisptr, Int32 iFile, ref Int32 pnFileSizeInBytes );
 		public string GetFileNameAndSize( Int32 iFile, ref Int32 pnFileSizeInBytes ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFileNameAndSizeII>( this.Functions.GetFileNameAndSize5 )( this.ObjectAddress, iFile, ref pnFileSizeInBytes ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFileNameAndSizeII>( this.Functions.GetFileNameAndSize5 )( this.ObjectAddress, iFile, ref pnFileSizeInBytes ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

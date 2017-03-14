@@ -147,6 +147,15 @@ namespace Steam4Intermediate.Nodes
                 if ( argtypes == "bool" )
                     argtypes = "[MarshalAs(UnmanagedType.I1)] " + argtypes;
 
+                //if (argtypes == "string_utf8")
+                //    argtypes = "IntPtr";
+
+                if (!(maskedparams.Contains(i) && genericwrapper))
+                {
+                    if (argtypes == "string")
+                        argtypes = "IntPtr";
+                }
+
                 arg_native.Add( argtypes + " " + argname );
             }
 
@@ -202,9 +211,17 @@ namespace Steam4Intermediate.Nodes
                 }
             }
 
-            if ( returns == "string" )
+            /*if ( returns == "string" )
             {
                 method.Append( "InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( " );
+            }
+            if (returns == "string_utf8")
+            {
+                method.Append("InteropHelp.Utf8PtrToString( ");
+            }*/
+            if (returns == "string")
+            {
+                method.Append("InteropHelp.Utf8PtrToString( ");
             }
 
             if ( genericwrapper )
@@ -259,6 +276,12 @@ namespace Steam4Intermediate.Nodes
                             argname = argname + ".ConvertToUint64()";
                         }
                     }
+                    // Nielk1 - Attempting to deal with UTF8 strings
+                    //else if (corrected_arg < arg.Count && (arg[corrected_arg].StartsWith("string_utf8 ")))
+                    else if (corrected_arg < arg.Count && (arg[corrected_arg].StartsWith("string ")))
+                    {
+                        argname = "InteropHelp.Utf8StringToPtr( " + argname + " ).GetMarshaledBytes()";
+                    }
                     else if (maskedparams.Contains(i + 1) && !genericwrapper)
                     {
                         native_arg_offset++;
@@ -291,9 +314,17 @@ namespace Steam4Intermediate.Nodes
                 method.Append( " )" );
             }
 
-            if ( returns == "string" )
+            /*if ( returns == "string" )
             {
                 method.Append(" ) )");
+            }
+            if ( returns == "string_utf8" )
+            {
+                method.Append(" )");
+            }*/
+            if (returns == "string")
+            {
+                method.Append(" )");
             }
 
             method.Append( "; " );

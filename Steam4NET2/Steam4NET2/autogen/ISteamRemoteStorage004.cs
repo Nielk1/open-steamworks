@@ -38,75 +38,75 @@ namespace Steam4NET
 	public class ISteamRemoteStorage004 : InteropHelp.NativeWrapper<ISteamRemoteStorage004VTable>
 	{
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileWriteSBI( IntPtr thisptr, string pchFile, Byte[] pvData, Int32 cubData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileWriteSBI( IntPtr thisptr, IntPtr pchFile, Byte[] pvData, Int32 cubData );
 		public bool FileWrite( string pchFile, Byte[] pvData ) 
 		{
-			return this.GetFunction<NativeFileWriteSBI>( this.Functions.FileWrite0 )( this.ObjectAddress, pchFile, pvData, (Int32) pvData.Length ); 
+			return this.GetFunction<NativeFileWriteSBI>( this.Functions.FileWrite0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes(), pvData, (Int32) pvData.Length ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeFileReadSBI( IntPtr thisptr, string pchFile, Byte[] pvData, Int32 cubDataToRead );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeFileReadSBI( IntPtr thisptr, IntPtr pchFile, Byte[] pvData, Int32 cubDataToRead );
 		public Int32 FileRead( string pchFile, Byte[] pvData ) 
 		{
-			return this.GetFunction<NativeFileReadSBI>( this.Functions.FileRead1 )( this.ObjectAddress, pchFile, pvData, (Int32) pvData.Length ); 
+			return this.GetFunction<NativeFileReadSBI>( this.Functions.FileRead1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes(), pvData, (Int32) pvData.Length ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileForgetS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileForgetS( IntPtr thisptr, IntPtr pchFile );
 		public bool FileForget( string pchFile ) 
 		{
-			return this.GetFunction<NativeFileForgetS>( this.Functions.FileForget2 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeFileForgetS>( this.Functions.FileForget2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileDeleteS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileDeleteS( IntPtr thisptr, IntPtr pchFile );
 		public bool FileDelete( string pchFile ) 
 		{
-			return this.GetFunction<NativeFileDeleteS>( this.Functions.FileDelete3 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeFileDeleteS>( this.Functions.FileDelete3 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeFileShareS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeFileShareS( IntPtr thisptr, IntPtr pchFile );
 		public UInt64 FileShare( string pchFile ) 
 		{
-			return this.GetFunction<NativeFileShareS>( this.Functions.FileShare4 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeFileShareS>( this.Functions.FileShare4 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetSyncPlatformsSE( IntPtr thisptr, string pchFile, ERemoteStoragePlatform eRemoteStoragePlatform );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetSyncPlatformsSE( IntPtr thisptr, IntPtr pchFile, ERemoteStoragePlatform eRemoteStoragePlatform );
 		public bool SetSyncPlatforms( string pchFile, ERemoteStoragePlatform eRemoteStoragePlatform ) 
 		{
-			return this.GetFunction<NativeSetSyncPlatformsSE>( this.Functions.SetSyncPlatforms5 )( this.ObjectAddress, pchFile, eRemoteStoragePlatform ); 
+			return this.GetFunction<NativeSetSyncPlatformsSE>( this.Functions.SetSyncPlatforms5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes(), eRemoteStoragePlatform ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileExistsS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFileExistsS( IntPtr thisptr, IntPtr pchFile );
 		public bool FileExists( string pchFile ) 
 		{
-			return this.GetFunction<NativeFileExistsS>( this.Functions.FileExists6 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeFileExistsS>( this.Functions.FileExists6 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFilePersistedS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeFilePersistedS( IntPtr thisptr, IntPtr pchFile );
 		public bool FilePersisted( string pchFile ) 
 		{
-			return this.GetFunction<NativeFilePersistedS>( this.Functions.FilePersisted7 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeFilePersistedS>( this.Functions.FilePersisted7 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileSizeS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileSizeS( IntPtr thisptr, IntPtr pchFile );
 		public Int32 GetFileSize( string pchFile ) 
 		{
-			return this.GetFunction<NativeGetFileSizeS>( this.Functions.GetFileSize8 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeGetFileSizeS>( this.Functions.GetFileSize8 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int64 NativeGetFileTimestampS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int64 NativeGetFileTimestampS( IntPtr thisptr, IntPtr pchFile );
 		public Int64 GetFileTimestamp( string pchFile ) 
 		{
-			return this.GetFunction<NativeGetFileTimestampS>( this.Functions.GetFileTimestamp9 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeGetFileTimestampS>( this.Functions.GetFileTimestamp9 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate ERemoteStoragePlatform NativeGetSyncPlatformsS( IntPtr thisptr, string pchFile );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate ERemoteStoragePlatform NativeGetSyncPlatformsS( IntPtr thisptr, IntPtr pchFile );
 		public ERemoteStoragePlatform GetSyncPlatforms( string pchFile ) 
 		{
-			return this.GetFunction<NativeGetSyncPlatformsS>( this.Functions.GetSyncPlatforms10 )( this.ObjectAddress, pchFile ); 
+			return this.GetFunction<NativeGetSyncPlatformsS>( this.Functions.GetSyncPlatforms10 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFile ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetFileCount( IntPtr thisptr );
@@ -118,7 +118,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetFileNameAndSizeII( IntPtr thisptr, Int32 iFile, ref Int32 pnFileSizeInBytes );
 		public string GetFileNameAndSize( Int32 iFile, ref Int32 pnFileSizeInBytes ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetFileNameAndSizeII>( this.Functions.GetFileNameAndSize12 )( this.ObjectAddress, iFile, ref pnFileSizeInBytes ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetFileNameAndSizeII>( this.Functions.GetFileNameAndSize12 )( this.ObjectAddress, iFile, ref pnFileSizeInBytes ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

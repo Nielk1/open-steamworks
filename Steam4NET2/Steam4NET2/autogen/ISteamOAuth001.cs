@@ -18,10 +18,10 @@ namespace Steam4NET
 	[InteropHelp.InterfaceVersion("SteamOAuth001")]
 	public class ISteamOAuth001 : InteropHelp.NativeWrapper<ISteamOAuth001VTable>
 	{
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeRequestOAuthTokenForAppS( IntPtr thisptr, string cszOAuthScope );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeRequestOAuthTokenForAppS( IntPtr thisptr, IntPtr cszOAuthScope );
 		public UInt64 RequestOAuthTokenForApp( string cszOAuthScope ) 
 		{
-			return this.GetFunction<NativeRequestOAuthTokenForAppS>( this.Functions.RequestOAuthTokenForApp0 )( this.ObjectAddress, cszOAuthScope ); 
+			return this.GetFunction<NativeRequestOAuthTokenForAppS>( this.Functions.RequestOAuthTokenForApp0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( cszOAuthScope ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

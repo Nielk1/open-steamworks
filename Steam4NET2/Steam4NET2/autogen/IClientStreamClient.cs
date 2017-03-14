@@ -49,10 +49,10 @@ namespace Steam4NET
 			this.GetFunction<NativeFinishedCE>( this.Functions.Finished3 )( this.ObjectAddress, gameID.ConvertToUint64(), eResult ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSaveStreamingClientConfigS( IntPtr thisptr, string arg0 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSaveStreamingClientConfigS( IntPtr thisptr, IntPtr arg0 );
 		public void SaveStreamingClientConfig( string arg0 ) 
 		{
-			this.GetFunction<NativeSaveStreamingClientConfigS>( this.Functions.SaveStreamingClientConfig4 )( this.ObjectAddress, arg0 ); 
+			this.GetFunction<NativeSaveStreamingClientConfigS>( this.Functions.SaveStreamingClientConfig4 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( arg0 ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -65,7 +65,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetSystemInfo( IntPtr thisptr );
 		public string GetSystemInfo(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetSystemInfo>( this.Functions.GetSystemInfo6 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetSystemInfo>( this.Functions.GetSystemInfo6 )( this.ObjectAddress ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeStartStreamingSessionC( IntPtr thisptr, UInt64 gameID );
@@ -74,16 +74,16 @@ namespace Steam4NET
 			this.GetFunction<NativeStartStreamingSessionC>( this.Functions.StartStreamingSession7 )( this.ObjectAddress, gameID.ConvertToUint64() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeReportStreamingSessionEventCS( IntPtr thisptr, UInt64 gameID, string arg1 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeReportStreamingSessionEventCS( IntPtr thisptr, UInt64 gameID, IntPtr arg1 );
 		public void ReportStreamingSessionEvent( CGameID gameID, string arg1 ) 
 		{
-			this.GetFunction<NativeReportStreamingSessionEventCS>( this.Functions.ReportStreamingSessionEvent8 )( this.ObjectAddress, gameID.ConvertToUint64(), arg1 ); 
+			this.GetFunction<NativeReportStreamingSessionEventCS>( this.Functions.ReportStreamingSessionEvent8 )( this.ObjectAddress, gameID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( arg1 ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeFinishStreamingSessionCSS( IntPtr thisptr, UInt64 gameID, string arg1, string arg2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeFinishStreamingSessionCSS( IntPtr thisptr, UInt64 gameID, IntPtr arg1, IntPtr arg2 );
 		public void FinishStreamingSession( CGameID gameID, string arg1, string arg2 ) 
 		{
-			this.GetFunction<NativeFinishStreamingSessionCSS>( this.Functions.FinishStreamingSession9 )( this.ObjectAddress, gameID.ConvertToUint64(), arg1, arg2 ); 
+			this.GetFunction<NativeFinishStreamingSessionCSS>( this.Functions.FinishStreamingSession9 )( this.ObjectAddress, gameID.ConvertToUint64(), InteropHelp.Utf8StringToPtr( arg1 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( arg2 ).GetMarshaledBytes() ); 
 		}
 		
 	};

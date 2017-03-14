@@ -93,22 +93,22 @@ namespace Steam4NET
 			return this.GetFunction<NativeRequestLobbyList>( this.Functions.RequestLobbyList4 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListStringFilterSSE( IntPtr thisptr, string pchKeyToMatch, string pchValueToMatch, ELobbyComparison eComparisonType );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListStringFilterSSE( IntPtr thisptr, IntPtr pchKeyToMatch, IntPtr pchValueToMatch, ELobbyComparison eComparisonType );
 		public void AddRequestLobbyListStringFilter( string pchKeyToMatch, string pchValueToMatch, ELobbyComparison eComparisonType ) 
 		{
-			this.GetFunction<NativeAddRequestLobbyListStringFilterSSE>( this.Functions.AddRequestLobbyListStringFilter5 )( this.ObjectAddress, pchKeyToMatch, pchValueToMatch, eComparisonType ); 
+			this.GetFunction<NativeAddRequestLobbyListStringFilterSSE>( this.Functions.AddRequestLobbyListStringFilter5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchKeyToMatch ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValueToMatch ).GetMarshaledBytes(), eComparisonType ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListNumericalFilterSIE( IntPtr thisptr, string pchKeyToMatch, Int32 nValueToMatch, ELobbyComparison eComparisonType );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListNumericalFilterSIE( IntPtr thisptr, IntPtr pchKeyToMatch, Int32 nValueToMatch, ELobbyComparison eComparisonType );
 		public void AddRequestLobbyListNumericalFilter( string pchKeyToMatch, Int32 nValueToMatch, ELobbyComparison eComparisonType ) 
 		{
-			this.GetFunction<NativeAddRequestLobbyListNumericalFilterSIE>( this.Functions.AddRequestLobbyListNumericalFilter6 )( this.ObjectAddress, pchKeyToMatch, nValueToMatch, eComparisonType ); 
+			this.GetFunction<NativeAddRequestLobbyListNumericalFilterSIE>( this.Functions.AddRequestLobbyListNumericalFilter6 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchKeyToMatch ).GetMarshaledBytes(), nValueToMatch, eComparisonType ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListNearValueFilterSI( IntPtr thisptr, string pchKeyToMatch, Int32 nValueToBeCloseTo );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListNearValueFilterSI( IntPtr thisptr, IntPtr pchKeyToMatch, Int32 nValueToBeCloseTo );
 		public void AddRequestLobbyListNearValueFilter( string pchKeyToMatch, Int32 nValueToBeCloseTo ) 
 		{
-			this.GetFunction<NativeAddRequestLobbyListNearValueFilterSI>( this.Functions.AddRequestLobbyListNearValueFilter7 )( this.ObjectAddress, pchKeyToMatch, nValueToBeCloseTo ); 
+			this.GetFunction<NativeAddRequestLobbyListNearValueFilterSI>( this.Functions.AddRequestLobbyListNearValueFilter7 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchKeyToMatch ).GetMarshaledBytes(), nValueToBeCloseTo ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeAddRequestLobbyListFilterSlotsAvailableI( IntPtr thisptr, Int32 nSlotsAvailable );
@@ -178,17 +178,17 @@ namespace Steam4NET
 			UInt64 ret = 0; this.GetFunction<NativeGetLobbyMemberByIndexCI>( this.Functions.GetLobbyMemberByIndex18 )( this.ObjectAddress, ref ret, steamIDLobby.ConvertToUint64(), iMember ); return new CSteamID(ret);
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLobbyDataCS( IntPtr thisptr, UInt64 steamIDLobby, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLobbyDataCS( IntPtr thisptr, UInt64 steamIDLobby, IntPtr pchKey );
 		public string GetLobbyData( CSteamID steamIDLobby, string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetLobbyDataCS>( this.Functions.GetLobbyData19 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetLobbyDataCS>( this.Functions.GetLobbyData19 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLobbyDataCSS( IntPtr thisptr, UInt64 steamIDLobby, string pchKey, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetLobbyDataCSS( IntPtr thisptr, UInt64 steamIDLobby, IntPtr pchKey, IntPtr pchValue );
 		public bool SetLobbyData( CSteamID steamIDLobby, string pchKey, string pchValue ) 
 		{
-			return this.GetFunction<NativeSetLobbyDataCSS>( this.Functions.SetLobbyData20 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), pchKey, pchValue ); 
+			return this.GetFunction<NativeSetLobbyDataCSS>( this.Functions.SetLobbyData20 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetLobbyDataCountC( IntPtr thisptr, UInt64 steamIDLobby );
@@ -205,22 +205,22 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeDeleteLobbyDataCS( IntPtr thisptr, UInt64 steamIDLobby, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeDeleteLobbyDataCS( IntPtr thisptr, UInt64 steamIDLobby, IntPtr pchKey );
 		public bool DeleteLobbyData( CSteamID steamIDLobby, string pchKey ) 
 		{
-			return this.GetFunction<NativeDeleteLobbyDataCS>( this.Functions.DeleteLobbyData23 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), pchKey ); 
+			return this.GetFunction<NativeDeleteLobbyDataCS>( this.Functions.DeleteLobbyData23 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLobbyMemberDataCCS( IntPtr thisptr, UInt64 steamIDLobby, UInt64 steamIDUser, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLobbyMemberDataCCS( IntPtr thisptr, UInt64 steamIDLobby, UInt64 steamIDUser, IntPtr pchKey );
 		public string GetLobbyMemberData( CSteamID steamIDLobby, CSteamID steamIDUser, string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetLobbyMemberDataCCS>( this.Functions.GetLobbyMemberData24 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), steamIDUser.ConvertToUint64(), pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetLobbyMemberDataCCS>( this.Functions.GetLobbyMemberData24 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), steamIDUser.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetLobbyMemberDataCSS( IntPtr thisptr, UInt64 steamIDLobby, string pchKey, string pchValue );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate void NativeSetLobbyMemberDataCSS( IntPtr thisptr, UInt64 steamIDLobby, IntPtr pchKey, IntPtr pchValue );
 		public void SetLobbyMemberData( CSteamID steamIDLobby, string pchKey, string pchValue ) 
 		{
-			this.GetFunction<NativeSetLobbyMemberDataCSS>( this.Functions.SetLobbyMemberData25 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), pchKey, pchValue ); 
+			this.GetFunction<NativeSetLobbyMemberDataCSS>( this.Functions.SetLobbyMemberData25 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchValue ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -316,10 +316,10 @@ namespace Steam4NET
 			return this.GetFunction<NativeSetLinkedLobbyCC>( this.Functions.SetLinkedLobby39 )( this.ObjectAddress, steamIDLobby.ConvertToUint64(), steamIDLobby2.ConvertToUint64() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeBeginGMSQueryUIS( IntPtr thisptr, UInt32 nAppId, Int32 iRegionCode, string szFilterText );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeBeginGMSQueryUIS( IntPtr thisptr, UInt32 nAppId, Int32 iRegionCode, IntPtr szFilterText );
 		public UInt64 BeginGMSQuery( UInt32 nAppId, Int32 iRegionCode, string szFilterText ) 
 		{
-			return this.GetFunction<NativeBeginGMSQueryUIS>( this.Functions.BeginGMSQuery40 )( this.ObjectAddress, nAppId, iRegionCode, szFilterText ); 
+			return this.GetFunction<NativeBeginGMSQueryUIS>( this.Functions.BeginGMSQuery40 )( this.ObjectAddress, nAppId, iRegionCode, InteropHelp.Utf8StringToPtr( szFilterText ).GetMarshaledBytes() ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativePollGMSQueryU( IntPtr thisptr, UInt64 ullGMSQuery );

@@ -65,7 +65,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetIPCountry( IntPtr thisptr );
 		public string GetIPCountry(  ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry4 )( this.ObjectAddress ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetIPCountry>( this.Functions.GetIPCountry4 )( this.ObjectAddress ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -159,17 +159,17 @@ namespace Steam4NET
 			return this.GetFunction<NativeBOverlayNeedsPresent>( this.Functions.BOverlayNeedsPresent18 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckFileSignatureS( IntPtr thisptr, string szFileName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt64 NativeCheckFileSignatureS( IntPtr thisptr, IntPtr szFileName );
 		public UInt64 CheckFileSignature( string szFileName ) 
 		{
-			return this.GetFunction<NativeCheckFileSignatureS>( this.Functions.CheckFileSignature19 )( this.ObjectAddress, szFileName ); 
+			return this.GetFunction<NativeCheckFileSignatureS>( this.Functions.CheckFileSignature19 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( szFileName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeShowGamepadTextInputEESU( IntPtr thisptr, EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, string szText, UInt32 uMaxLength );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeShowGamepadTextInputEESU( IntPtr thisptr, EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, IntPtr szText, UInt32 uMaxLength );
 		public bool ShowGamepadTextInput( EGamepadTextInputMode eInputMode, EGamepadTextInputLineMode eInputLineMode, string szText, UInt32 uMaxLength ) 
 		{
-			return this.GetFunction<NativeShowGamepadTextInputEESU>( this.Functions.ShowGamepadTextInput20 )( this.ObjectAddress, eInputMode, eInputLineMode, szText, uMaxLength ); 
+			return this.GetFunction<NativeShowGamepadTextInputEESU>( this.Functions.ShowGamepadTextInput20 )( this.ObjectAddress, eInputMode, eInputLineMode, InteropHelp.Utf8StringToPtr( szText ).GetMarshaledBytes(), uMaxLength ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetEnteredGamepadTextLength( IntPtr thisptr );

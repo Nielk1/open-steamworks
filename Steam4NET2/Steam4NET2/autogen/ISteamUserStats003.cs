@@ -36,59 +36,59 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetStatSF( IntPtr thisptr, string pchName, ref float pData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetStatSF( IntPtr thisptr, IntPtr pchName, ref float pData );
 		public bool GetStat( string pchName, ref float pData ) 
 		{
-			return this.GetFunction<NativeGetStatSF>( this.Functions.GetStat1 )( this.ObjectAddress, pchName, ref pData ); 
+			return this.GetFunction<NativeGetStatSF>( this.Functions.GetStat1 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), ref pData ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetStatSI( IntPtr thisptr, string pchName, ref Int32 pData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetStatSI( IntPtr thisptr, IntPtr pchName, ref Int32 pData );
 		public bool GetStat( string pchName, ref Int32 pData ) 
 		{
-			return this.GetFunction<NativeGetStatSI>( this.Functions.GetStat2 )( this.ObjectAddress, pchName, ref pData ); 
+			return this.GetFunction<NativeGetStatSI>( this.Functions.GetStat2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), ref pData ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetStatSF( IntPtr thisptr, string pchName, float fData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetStatSF( IntPtr thisptr, IntPtr pchName, float fData );
 		public bool SetStat( string pchName, float fData ) 
 		{
-			return this.GetFunction<NativeSetStatSF>( this.Functions.SetStat3 )( this.ObjectAddress, pchName, fData ); 
+			return this.GetFunction<NativeSetStatSF>( this.Functions.SetStat3 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), fData ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetStatSI( IntPtr thisptr, string pchName, Int32 nData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetStatSI( IntPtr thisptr, IntPtr pchName, Int32 nData );
 		public bool SetStat( string pchName, Int32 nData ) 
 		{
-			return this.GetFunction<NativeSetStatSI>( this.Functions.SetStat4 )( this.ObjectAddress, pchName, nData ); 
+			return this.GetFunction<NativeSetStatSI>( this.Functions.SetStat4 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), nData ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeUpdateAvgRateStatSFD( IntPtr thisptr, string pchName, float arg1, double dSessionLength );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeUpdateAvgRateStatSFD( IntPtr thisptr, IntPtr pchName, float arg1, double dSessionLength );
 		public bool UpdateAvgRateStat( string pchName, float arg1, double dSessionLength ) 
 		{
-			return this.GetFunction<NativeUpdateAvgRateStatSFD>( this.Functions.UpdateAvgRateStat5 )( this.ObjectAddress, pchName, arg1, dSessionLength ); 
+			return this.GetFunction<NativeUpdateAvgRateStatSFD>( this.Functions.UpdateAvgRateStat5 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), arg1, dSessionLength ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetAchievementSB( IntPtr thisptr, string pchName, ref bool pbAchieved );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetAchievementSB( IntPtr thisptr, IntPtr pchName, ref bool pbAchieved );
 		public bool GetAchievement( string pchName, ref bool pbAchieved ) 
 		{
-			return this.GetFunction<NativeGetAchievementSB>( this.Functions.GetAchievement6 )( this.ObjectAddress, pchName, ref pbAchieved ); 
+			return this.GetFunction<NativeGetAchievementSB>( this.Functions.GetAchievement6 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), ref pbAchieved ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetAchievementS( IntPtr thisptr, string pchName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetAchievementS( IntPtr thisptr, IntPtr pchName );
 		public bool SetAchievement( string pchName ) 
 		{
-			return this.GetFunction<NativeSetAchievementS>( this.Functions.SetAchievement7 )( this.ObjectAddress, pchName ); 
+			return this.GetFunction<NativeSetAchievementS>( this.Functions.SetAchievement7 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeClearAchievementS( IntPtr thisptr, string pchName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeClearAchievementS( IntPtr thisptr, IntPtr pchName );
 		public bool ClearAchievement( string pchName ) 
 		{
-			return this.GetFunction<NativeClearAchievementS>( this.Functions.ClearAchievement8 )( this.ObjectAddress, pchName ); 
+			return this.GetFunction<NativeClearAchievementS>( this.Functions.ClearAchievement8 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -98,23 +98,23 @@ namespace Steam4NET
 			return this.GetFunction<NativeStoreStats>( this.Functions.StoreStats9 )( this.ObjectAddress ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetAchievementIconS( IntPtr thisptr, string pchName );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate Int32 NativeGetAchievementIconS( IntPtr thisptr, IntPtr pchName );
 		public Int32 GetAchievementIcon( string pchName ) 
 		{
-			return this.GetFunction<NativeGetAchievementIconS>( this.Functions.GetAchievementIcon10 )( this.ObjectAddress, pchName ); 
+			return this.GetFunction<NativeGetAchievementIconS>( this.Functions.GetAchievementIcon10 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes() ); 
 		}
 		
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetAchievementDisplayAttributeSS( IntPtr thisptr, string pchName, string pchKey );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetAchievementDisplayAttributeSS( IntPtr thisptr, IntPtr pchName, IntPtr pchKey );
 		public string GetAchievementDisplayAttribute( string pchName, string pchKey ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetAchievementDisplayAttributeSS>( this.Functions.GetAchievementDisplayAttribute11 )( this.ObjectAddress, pchName, pchKey ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetAchievementDisplayAttributeSS>( this.Functions.GetAchievementDisplayAttribute11 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchKey ).GetMarshaledBytes() ) ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeIndicateAchievementProgressSUU( IntPtr thisptr, string pchName, UInt32 nCurProgress, UInt32 nMaxProgress );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeIndicateAchievementProgressSUU( IntPtr thisptr, IntPtr pchName, UInt32 nCurProgress, UInt32 nMaxProgress );
 		public bool IndicateAchievementProgress( string pchName, UInt32 nCurProgress, UInt32 nMaxProgress ) 
 		{
-			return this.GetFunction<NativeIndicateAchievementProgressSUU>( this.Functions.IndicateAchievementProgress12 )( this.ObjectAddress, pchName, nCurProgress, nMaxProgress ); 
+			return this.GetFunction<NativeIndicateAchievementProgressSUU>( this.Functions.IndicateAchievementProgress12 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchName ).GetMarshaledBytes(), nCurProgress, nMaxProgress ); 
 		}
 		
 	};

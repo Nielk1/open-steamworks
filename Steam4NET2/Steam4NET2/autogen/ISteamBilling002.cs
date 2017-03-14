@@ -73,17 +73,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetActivationCodeInfoS( IntPtr thisptr, string pchActivationCode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetActivationCodeInfoS( IntPtr thisptr, IntPtr pchActivationCode );
 		public bool GetActivationCodeInfo( string pchActivationCode ) 
 		{
-			return this.GetFunction<NativeGetActivationCodeInfoS>( this.Functions.GetActivationCodeInfo2 )( this.ObjectAddress, pchActivationCode ); 
+			return this.GetFunction<NativeGetActivationCodeInfoS>( this.Functions.GetActivationCodeInfo2 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchActivationCode ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativePurchaseWithActivationCodeS( IntPtr thisptr, string pchActivationCode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativePurchaseWithActivationCodeS( IntPtr thisptr, IntPtr pchActivationCode );
 		public bool PurchaseWithActivationCode( string pchActivationCode ) 
 		{
-			return this.GetFunction<NativePurchaseWithActivationCodeS>( this.Functions.PurchaseWithActivationCode3 )( this.ObjectAddress, pchActivationCode ); 
+			return this.GetFunction<NativePurchaseWithActivationCodeS>( this.Functions.PurchaseWithActivationCode3 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchActivationCode ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -150,10 +150,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetBillingAddressUSSSSSSSSS( IntPtr thisptr, UInt32 nCardIndex, string pchFirstName, string pchLastName, string pchAddress1, string pchAddress2, string pchCity, string pchPostcode, string pchState, string pchCountry, string pchPhone );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetBillingAddressUSSSSSSSSS( IntPtr thisptr, UInt32 nCardIndex, IntPtr pchFirstName, IntPtr pchLastName, IntPtr pchAddress1, IntPtr pchAddress2, IntPtr pchCity, IntPtr pchPostcode, IntPtr pchState, IntPtr pchCountry, IntPtr pchPhone );
 		public bool SetBillingAddress( UInt32 nCardIndex, string pchFirstName, string pchLastName, string pchAddress1, string pchAddress2, string pchCity, string pchPostcode, string pchState, string pchCountry, string pchPhone ) 
 		{
-			return this.GetFunction<NativeSetBillingAddressUSSSSSSSSS>( this.Functions.SetBillingAddress13 )( this.ObjectAddress, nCardIndex, pchFirstName, pchLastName, pchAddress1, pchAddress2, pchCity, pchPostcode, pchState, pchCountry, pchPhone ); 
+			return this.GetFunction<NativeSetBillingAddressUSSSSSSSSS>( this.Functions.SetBillingAddress13 )( this.ObjectAddress, nCardIndex, InteropHelp.Utf8StringToPtr( pchFirstName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchLastName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchAddress1 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchAddress2 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCity ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchPostcode ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchState ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCountry ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchPhone ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -164,10 +164,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetShippingAddressSSSSSSSSS( IntPtr thisptr, string pchFirstName, string pchLastName, string pchAddress1, string pchAddress2, string pchCity, string pchPostcode, string pchState, string pchCountry, string pchPhone );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetShippingAddressSSSSSSSSS( IntPtr thisptr, IntPtr pchFirstName, IntPtr pchLastName, IntPtr pchAddress1, IntPtr pchAddress2, IntPtr pchCity, IntPtr pchPostcode, IntPtr pchState, IntPtr pchCountry, IntPtr pchPhone );
 		public bool SetShippingAddress( string pchFirstName, string pchLastName, string pchAddress1, string pchAddress2, string pchCity, string pchPostcode, string pchState, string pchCountry, string pchPhone ) 
 		{
-			return this.GetFunction<NativeSetShippingAddressSSSSSSSSS>( this.Functions.SetShippingAddress15 )( this.ObjectAddress, pchFirstName, pchLastName, pchAddress1, pchAddress2, pchCity, pchPostcode, pchState, pchCountry, pchPhone ); 
+			return this.GetFunction<NativeSetShippingAddressSSSSSSSSS>( this.Functions.SetShippingAddress15 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchFirstName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchLastName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchAddress1 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchAddress2 ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCity ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchPostcode ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchState ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCountry ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchPhone ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -178,10 +178,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetCardInfoUESSSSSS( IntPtr thisptr, UInt32 nCardIndex, ECreditCardType eCreditCardType, string pchCardNumber, string pchCardHolderFirstName, string pchCardHolderLastName, string pchCardExpYear, string pchCardExpMonth, string pchCardCVV2 );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeSetCardInfoUESSSSSS( IntPtr thisptr, UInt32 nCardIndex, ECreditCardType eCreditCardType, IntPtr pchCardNumber, IntPtr pchCardHolderFirstName, IntPtr pchCardHolderLastName, IntPtr pchCardExpYear, IntPtr pchCardExpMonth, IntPtr pchCardCVV2 );
 		public bool SetCardInfo( UInt32 nCardIndex, ECreditCardType eCreditCardType, string pchCardNumber, string pchCardHolderFirstName, string pchCardHolderLastName, string pchCardExpYear, string pchCardExpMonth, string pchCardCVV2 ) 
 		{
-			return this.GetFunction<NativeSetCardInfoUESSSSSS>( this.Functions.SetCardInfo17 )( this.ObjectAddress, nCardIndex, eCreditCardType, pchCardNumber, pchCardHolderFirstName, pchCardHolderLastName, pchCardExpYear, pchCardExpMonth, pchCardCVV2 ); 
+			return this.GetFunction<NativeSetCardInfoUESSSSSS>( this.Functions.SetCardInfo17 )( this.ObjectAddress, nCardIndex, eCreditCardType, InteropHelp.Utf8StringToPtr( pchCardNumber ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCardHolderFirstName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCardHolderLastName ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCardExpYear ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCardExpMonth ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCardCVV2 ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
@@ -236,7 +236,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetLicensePurchaseCountryCodeU( IntPtr thisptr, UInt32 nLicenseIndex );
 		public string GetLicensePurchaseCountryCode( UInt32 nLicenseIndex ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetLicensePurchaseCountryCodeU>( this.Functions.GetLicensePurchaseCountryCode26 )( this.ObjectAddress, nLicenseIndex ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetLicensePurchaseCountryCodeU>( this.Functions.GetLicensePurchaseCountryCode26 )( this.ObjectAddress, nLicenseIndex ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetReceiptPackageIDU( IntPtr thisptr, UInt32 nReceiptIndex );
@@ -302,7 +302,7 @@ namespace Steam4NET
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate IntPtr NativeGetReceiptCountryCodeU( IntPtr thisptr, UInt32 nReceiptIndex );
 		public string GetReceiptCountryCode( UInt32 nReceiptIndex ) 
 		{
-			return InteropHelp.DecodeANSIReturn( Marshal.PtrToStringAnsi( this.GetFunction<NativeGetReceiptCountryCodeU>( this.Functions.GetReceiptCountryCode37 )( this.ObjectAddress, nReceiptIndex ) ) ); 
+			return InteropHelp.Utf8PtrToString( this.GetFunction<NativeGetReceiptCountryCodeU>( this.Functions.GetReceiptCountryCode37 )( this.ObjectAddress, nReceiptIndex ) ); 
 		}
 		
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate UInt32 NativeGetNumLicenses( IntPtr thisptr );
@@ -318,17 +318,17 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativePurchaseWithMachineIDUS( IntPtr thisptr, UInt32 nPackageID, string pchCustomData );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativePurchaseWithMachineIDUS( IntPtr thisptr, UInt32 nPackageID, IntPtr pchCustomData );
 		public bool PurchaseWithMachineID( UInt32 nPackageID, string pchCustomData ) 
 		{
-			return this.GetFunction<NativePurchaseWithMachineIDUS>( this.Functions.PurchaseWithMachineID40 )( this.ObjectAddress, nPackageID, pchCustomData ); 
+			return this.GetFunction<NativePurchaseWithMachineIDUS>( this.Functions.PurchaseWithMachineID40 )( this.ObjectAddress, nPackageID, InteropHelp.Utf8StringToPtr( pchCustomData ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInitClickAndBuyPurchaseUISS( IntPtr thisptr, UInt32 nPackageID, Int64 nAccountNum, string pchState, string pchCountryCode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeInitClickAndBuyPurchaseUISS( IntPtr thisptr, UInt32 nPackageID, Int64 nAccountNum, IntPtr pchState, IntPtr pchCountryCode );
 		public bool InitClickAndBuyPurchase( UInt32 nPackageID, Int64 nAccountNum, string pchState, string pchCountryCode ) 
 		{
-			return this.GetFunction<NativeInitClickAndBuyPurchaseUISS>( this.Functions.InitClickAndBuyPurchase41 )( this.ObjectAddress, nPackageID, nAccountNum, pchState, pchCountryCode ); 
+			return this.GetFunction<NativeInitClickAndBuyPurchaseUISS>( this.Functions.InitClickAndBuyPurchase41 )( this.ObjectAddress, nPackageID, nAccountNum, InteropHelp.Utf8StringToPtr( pchState ).GetMarshaledBytes(), InteropHelp.Utf8StringToPtr( pchCountryCode ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]

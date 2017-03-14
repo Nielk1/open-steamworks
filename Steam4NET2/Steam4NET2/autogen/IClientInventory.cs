@@ -180,10 +180,10 @@ namespace Steam4NET
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetItemDefinitionPropertyISSU( IntPtr thisptr, Int32 iDefinition, string pchPropertyName, StringBuilder pchValueBuffer, ref UInt32 punValueBufferSize );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativeGetItemDefinitionPropertyISSU( IntPtr thisptr, Int32 iDefinition, IntPtr pchPropertyName, StringBuilder pchValueBuffer, ref UInt32 punValueBufferSize );
 		public bool GetItemDefinitionProperty( Int32 iDefinition, string pchPropertyName, StringBuilder pchValueBuffer, ref UInt32 punValueBufferSize ) 
 		{
-			return this.GetFunction<NativeGetItemDefinitionPropertyISSU>( this.Functions.GetItemDefinitionProperty21 )( this.ObjectAddress, iDefinition, pchPropertyName, pchValueBuffer, ref punValueBufferSize ); 
+			return this.GetFunction<NativeGetItemDefinitionPropertyISSU>( this.Functions.GetItemDefinitionProperty21 )( this.ObjectAddress, iDefinition, InteropHelp.Utf8StringToPtr( pchPropertyName ).GetMarshaledBytes(), pchValueBuffer, ref punValueBufferSize ); 
 		}
 		
 	};

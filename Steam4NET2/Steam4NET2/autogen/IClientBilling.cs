@@ -27,10 +27,10 @@ namespace Steam4NET
 	public class IClientBilling : InteropHelp.NativeWrapper<IClientBillingVTable>
 	{
 		[return: MarshalAs(UnmanagedType.I1)]
-		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativePurchaseWithActivationCodeS( IntPtr thisptr, string pchActivationCode );
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)] private delegate bool NativePurchaseWithActivationCodeS( IntPtr thisptr, IntPtr pchActivationCode );
 		public bool PurchaseWithActivationCode( string pchActivationCode ) 
 		{
-			return this.GetFunction<NativePurchaseWithActivationCodeS>( this.Functions.PurchaseWithActivationCode0 )( this.ObjectAddress, pchActivationCode ); 
+			return this.GetFunction<NativePurchaseWithActivationCodeS>( this.Functions.PurchaseWithActivationCode0 )( this.ObjectAddress, InteropHelp.Utf8StringToPtr( pchActivationCode ).GetMarshaledBytes() ); 
 		}
 		
 		[return: MarshalAs(UnmanagedType.I1)]
