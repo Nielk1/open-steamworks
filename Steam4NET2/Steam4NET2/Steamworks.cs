@@ -72,15 +72,31 @@ namespace Steam4NET
         {
             string installPath = "";
 
-            try
+            if (IntPtr.Size == 8)
             {
-                installPath = (string)Registry.GetValue(
-                     @"HKEY_LOCAL_MACHINE\Software\Valve\Steam",
-                     "InstallPath",
-                     null);
+                try
+                {
+                    installPath = (string)Registry.GetValue(
+                            @"HKEY_LOCAL_MACHINE\Software\Wow6432Node\Valve\Steam",
+                            "InstallPath",
+                            null);
+                }
+                catch
+                {
+                }
             }
-            catch
+            else
             {
+                try
+                {
+                    installPath = (string)Registry.GetValue(
+                         @"HKEY_LOCAL_MACHINE\Software\Valve\Steam",
+                         "InstallPath",
+                         null);
+                }
+                catch
+                {
+                }
             }
 
             return installPath;
